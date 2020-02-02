@@ -1,0 +1,234 @@
+<nav class="navbar navbar-expand-lg navbar-light rounded mr-0 ml-0 w-lg fixed-top">
+  <a class="navbar-brand">
+    <fa name="film fa-lg"></fa>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <fa name="bars fa-lg" style="color: white"></fa>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item dropdown" *ngIf="isUserLoggedIn">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMovies" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Movies
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/movies">Display</a>
+          <a class="dropdown-item" href="#">Add New</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Favourite</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown d-lg-none">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Footer
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <h6 class="foot pl-4">INFORMATION ABOUT:</h6>
+          <a class="dropdown-item" [routerLink]="['/myself']">Myself</a>
+          <a class="dropdown-item" [routerLink]="['/exam']">Exam</a>
+          <div class="dropdown-divider"></div>
+          <h6 class="foot pl-4">INFORMATION FOR:</h6>
+          <a class="dropdown-item" [routerLink]="['/users']">Users</a>
+          <div class="dropdown-divider"></div>
+          <h6 class="foot pl-4">QUICK LINKS:</h6>
+          <a class="dropdown-item" [routerLink]="['/example']">Example 1</a>
+          <a class="dropdown-item" [routerLink]="['/example']">Example 2</a>
+          <div class="dropdown-divider"></div>
+          <h6 class="foot pl-4">CONTACTS:</h6>
+          <a class="dropdown-item" [routerLink]="['/generals']">Generals</a>
+        </div>
+      </li>
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <fa class="credential-cls" *ngIf="!isUserLoggedIn" name="sign-in fa-lg" (click)="openSignIn(contentSignIn)"></fa>&nbsp;&nbsp;&nbsp;
+      <fa class="credential-cls" *ngIf="!isUserLoggedIn" name="user-plus fa-lg" (click)="openSignUp(contentSignUp)"></fa>
+      <div *ngIf="isUserLoggedIn">
+        <b class="text-light">Welcome {{name}} &nbsp;&nbsp;&nbsp;</b>
+      </div>
+      <fa class="credential-cls" *ngIf="isUserLoggedIn" name="external-link fa-lg" (click)="logout($event)"></fa>
+    </div>
+  </div>
+</nav>
+
+<!-- Sign In -->
+<ng-template #contentSignIn let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Sign In</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="loginForm" #f="ngForm" (ngSubmit)="login(f)">
+      <div class="row">
+        <div class="offset-2 col-8 offset-2">
+          <div class="form-group small">
+            <label for="email"><h6 class="text-credential label-auth">Email</h6></label>
+            <input required class="form-control" email type="email" ngModel #email="ngModel" name="email" id="email">
+          </div>
+          <div *ngIf="email.dirty && email.touched && email.invalid">
+            <div class="alert-danger small" *ngIf="email.errors['required']">
+              The field Email is required!
+            </div>
+            <div class="alert-danger small" *ngIf="email.errors['email']">
+              The value must be a valid Email!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="offset-2 col-8 offset-2">
+          <div class="form-group">
+            <label for="password"><h6 class="text-credential label-auth">Password</h6></label>
+            <input required class="form-control" minlength="6" maxlength="20" type="password" ngModel #password="ngModel" name="password" id="password">
+          </div>
+          <div *ngIf="password.dirty && password.touched && password.invalid">
+            <div class="alert-danger" *ngIf="password.errors['required']">
+              The field password is required!
+            </div>
+            <div class="alert-danger" *ngIf="password.errors['minlength']">
+              The minlenght is {{password.errors['minlength'].requiredLength}} and the maxlenght is 20!
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-12">
+        <div class="alert-danger text-center">
+          <b>{{mex}}</b>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="!f.valid" type="button" class="btn btn-outline-dark" (click)="login(f)">Login</button>
+  </div>
+</ng-template>
+
+<!-- Sign Up -->
+<ng-template #contentSignUp let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Sign Up</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="signupForm" #f="ngForm" (ngSubmit)="signUp(f)">
+      <div class="row">
+        <div class="offset-1 col-10 offset-1">
+          <div class="form-group small">
+            <label for="name"><h6 class="text-credential label-auth">Name</h6></label>
+            <input required class="form-control" type="name" ngModel #name="ngModel" name="name" id="name">
+          </div>
+          <div *ngIf="name.dirty && name.touched && name.invalid">
+            <div class="alert-warning small" *ngIf="name.errors['required']">
+              The field Name is required!
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-1 col-10 offset-1">
+          <div class="form-group small">
+            <label for="lastname"><h6 class="text-credential label-auth">Lastname</h6></label>
+            <input required class="form-control" type="lastname" ngModel #lastname="ngModel" name="lastname" id="lastname">
+          </div>
+          <div *ngIf="lastname.dirty && lastname.touched && lastname.invalid">
+            <div class="alert-warning small" *ngIf="lastname.errors['required']">
+              The field Nastname is required!
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-1 col-10 offset-1">
+          <div class="form-group small">
+            <label for="email"><h6 class="text-credential label-auth">Email</h6></label>
+            <input required class="form-control" email type="email" ngModel #email="ngModel" name="email" id="email">
+          </div>
+          <div *ngIf="email.dirty && email.touched && email.invalid">
+            <div class="alert-warning small" *ngIf="email.errors['required']">
+              The field Email is required!
+            </div>
+            <div class="alert-warning small" *ngIf="email.errors['email']">
+              The value must be a valid Email!
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-1 col-10 offset-1">
+          <div class="form-group small">
+            <label for="repeatemail"><h6 class="text-credential label-auth">Confirm Email</h6></label>
+            <input required class="form-control" email type="repeatemail" ngModel #repeatemail="ngModel" name="repeatemail" id="repeatemail" compare="email">
+          </div>
+          <div *ngIf="repeatemail.invalid && (repeatemail.dirty || repeatemail.touched)">
+            <div class="alert-warning small" *ngIf="repeatemail.errors['required']">
+              The field Confirm Email is required!
+            </div>
+            <div class="alert-warning small" *ngIf="repeatemail.errors['compare']">
+              The field Confirm Email do not match!
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-1 col-10 offset-1">
+          <div class="form-group small">
+            <label for="password"><h6 class="text-credential label-auth">Password</h6></label>
+            <input required class="form-control" minlength="6" maxlength="20" type="password" ngModel #password="ngModel" name="password" id="password">
+          </div>
+          <div *ngIf="password.invalid && (password.dirty || password.touched)">
+            <div class="alert-warning small" *ngIf="password.errors['required']">
+              The field Password is required!
+            </div>
+            <div class="alert-warning small" *ngIf="password.errors['minlength']">
+              The Minlenght must be greater than {{password.errors['minlength'].requiredLength}} and less than 20!
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-1 col-10 offset-1">
+          <div class="form-group small">
+            <label for="repeatpassword"><h6 class="text-credential label-auth">Confirm Password</h6></label>
+            <input required class="form-control" type="password" ngModel #repeatpassword="ngModel" name="repeatpassword" id="repeatpassword" compare="password">
+          </div>
+          <div *ngIf="repeatpassword.invalid && (repeatpassword.dirty || repeatpassword.touched)">
+            <div class="alert-warning small" *ngIf="repeatpassword.errors['required']">
+              The field Confirm Password is required!
+            </div>
+            <div class="alert-warning small" *ngIf="repeatpassword.errors['compare']">
+              The field Confirm Password do not match!
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row ok-message">
+      <div class="col-12">
+        <div class="alert-success text-center">
+          <b>{{mexOk}}</b>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="alert-danger text-center">
+          <b>{{mexFail}}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="!f.valid" class="btn btn-primary btn-sm" (click)="signUp(f)">Submit</button>
+  </div>
+</ng-template>

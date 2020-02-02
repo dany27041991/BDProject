@@ -1,0 +1,70 @@
+<div class="container-fluid" style=" background: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,0)),
+    url('../../assets/images/background-movies.jpg') no-repeat fixed center;">
+  <div class="row p-5 mb-2 text-center" *ngIf="moviePage">
+    <div class="col-3 mb-1 text-center" [@flyInOut]="'in'" *ngFor="let movie of moviePage.content | paginate: { itemsPerPage: 20, currentPage: page, id: 'list-movies-id', totalItems: moviePage.totalElements}">
+      <div class="card p-2" style="width: 16rem; height: 36rem;">
+          <img class="card-img-top" src="{{movie.poster}}" alt="{{movie.poster}}" style="width: 100%; height: 300px;">
+          <div class="card-body overflow-auto">
+            <div class="scrollable">
+              <h5 class="card-title">{{movie.title}}</h5>
+              <p class="card-text">{{movie.plot}}</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-6">
+                <h6>AV. 4/5</h6>
+              </div>
+              <div class="offset-2 col-2">
+                <fa class="favourite-btn" name="heart fa-lg"></fa>
+              </div>
+            </div>
+            <star-rating value="0" totalstars="5" checkedcolor="yellow" uncheckedcolor="white" size="24px" readonly="false" (rate)="onRate($event, movie.idmovie)"></star-rating>
+            <button class="btn btn-outline-primary" (click)="openMovieDetail(content, movie)">View Details</button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="row text-center" *ngIf="moviePage">
+  <div class="col-12 mt-3 mb-2">
+    <pagination-controls (pageChange)="page = $event; getNewPageMovies()" id="list-movies-id"></pagination-controls>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header" *ngIf="selectedMovie">
+    <h4 class="modal-title" id="modal-basic-title">{{selectedMovie['title']}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row ml-1 mr-1" *ngIf="selectedMovie">
+      <div class="col-6">
+        <div class="row"><p><b>Genre:</b>&nbsp; {{selectedMovie['genre']}}</p></div>
+        <div class="row"><p><b>Year:</b>&nbsp; {{selectedMovie['year']}}&nbsp; <b>Runtime:</b>&nbsp; {{selectedMovie['runtime']}}</p></div>
+        <div class="row"><p><b>Language:</b>&nbsp; {{selectedMovie['language']}}</p></div>
+        <div class="row"><p><b>Country:</b>&nbsp; {{selectedMovie['country']}}</p></div>
+        <div class="row"><p><b>Production:</b>&nbsp; {{selectedMovie['production']}}</p></div>
+        <div class="row"><p><b>Released:</b>&nbsp; {{selectedMovie['released']}}</p></div>
+        <div class="row"><p><b>Dvd:</b>&nbsp; {{selectedMovie['dvd']}}</p></div>
+        <div class="row"><p><b>Director:</b>&nbsp; {{selectedMovie['director']}}</p></div>
+      </div>
+      <div class="col-6">
+        <img class="card-img-top" src="{{selectedMovie['poster']}}" alt="{{selectedMovie['poster']}}" style="width: 210px;">
+      </div>
+    </div>
+    <div class="row ml-1 mr-1" *ngIf="selectedMovie">
+      <div class="col-12">
+        <div class="row"><p><b>Writer:</b>&nbsp; {{selectedMovie['writer']}}</p></div>
+        <div class="row"><p><b>Actors:</b>&nbsp; {{selectedMovie['actors']}}</p></div>
+        <div class="row"><p><b>Plot:</b>&nbsp; {{selectedMovie['plot']}}</p></div>
+        <div class="row"><p><b>Adwards:</b>&nbsp; {{selectedMovie['adwards']}}</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>

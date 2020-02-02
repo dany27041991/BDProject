@@ -1,0 +1,58 @@
+a:not([href]):not([tabindex]) {
+  color: white;
+}
+
+.navbar-toggler {
+  border-color: white;
+}
+
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
+  color: white;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+}
+
+.navbar-light[_ngcontent-c4] {
+  z-index: 1;
+}
+
+fa.credential-cls {
+  cursor: pointer;
+  color: white !important;
+}
+
+fa.credential-cls:hover {
+  cursor: pointer;
+  color: dodgerblue !important;
+}
+
+label {
+  color: dodgerblue;
+}
+
+@media (max-width:1023px){
+  .navbar-light {
+    background: rgba(0, 0, 0, 0.8);
+    margin-right: 15px !important;
+  }
+  a.nav-link:hover {
+    color: dodgerblue !important;
+  }
+  h6 {
+    color: dodgerblue !important;
+  }
+}
+
+@media (min-width:1024px){
+  .navbar-light {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  a.nav-link:hover {
+    color: dodgerblue !important;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}

@@ -1,0 +1,7 @@
+@keyframes in  {from{opacity: 0}to {opacity: 1}}
+@keyframes out {from{opacity: 1}to {opacity: 0}}
+
+#image-header {
+  opacity: 0;
+  animation: in 3s ease forwards 1
+}
