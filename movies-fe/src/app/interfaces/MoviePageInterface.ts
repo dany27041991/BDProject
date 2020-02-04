@@ -16,8 +16,8 @@ export interface MoviePageInterface {
     poster?:  string;
     dvd:  Date;
     production:  string;
-    liked:  Array<Object>;
-    ratings:  Array<Object>;
+    addFavouritesObj:  Array<Object>;
+    ratingsObj:  Array<Object>;
   }];
   pageable?:  {
     sort:  {

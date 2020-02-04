@@ -3,6 +3,7 @@ package com.example.moviesbk.controllers;
 import com.example.moviesbk.dtos.ContactFormDTO;
 import com.example.moviesbk.dtos.FavouriteFormDTO;
 import com.example.moviesbk.dtos.LoginFormDTO;
+import com.example.moviesbk.dtos.RatingFormDTO;
 import com.example.moviesbk.dtos.RegistrationFormDTO;
 import com.example.moviesbk.entities.User;
 import com.example.moviesbk.exceptions.UserNotExist;
@@ -124,8 +125,16 @@ public class RestController {
     @RequestMapping(value = "/movies/add-favourite", method = RequestMethod.POST)
     public ResponseEntity<JsonResponseBody> addToFavourite(@Valid @RequestBody FavouriteFormDTO favouriteFormDTO){
         try {
-        	userService.insertToFavourite(favouriteFormDTO);
-            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), "Film Added correctly in Favourite!"));
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), userService.insertToFavourite(favouriteFormDTO)));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
+        }
+    }
+    
+    @RequestMapping(value = "/movies/add-rate", method = RequestMethod.POST)
+    public ResponseEntity<JsonResponseBody> addRate(@Valid @RequestBody RatingFormDTO ratingFormDTO){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), null));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
         }

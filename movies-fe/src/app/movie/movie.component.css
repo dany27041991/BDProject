@@ -45,10 +45,6 @@
   color: yellow;
 }
 
-fa.favourite-btn {
-  color: white !important;
-}
-
 fa.favourite-btn:hover {
   color: red !important;
 }

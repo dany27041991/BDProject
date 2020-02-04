@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "Contact")
 @NoArgsConstructor @AllArgsConstructor

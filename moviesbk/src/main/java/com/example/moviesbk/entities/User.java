@@ -6,16 +6,12 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "user")
 @AllArgsConstructor @NoArgsConstructor

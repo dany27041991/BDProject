@@ -1,20 +1,15 @@
 package com.example.moviesbk.services;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException.Forbidden;
-
 import com.example.moviesbk.daos.MovieDao;
-import com.example.moviesbk.dtos.FavouriteFormDTO;
 import com.example.moviesbk.dtos.MovieDTO;
 import com.example.moviesbk.dtos.MoviePageDTO;
 import com.example.moviesbk.entities.AddFavourite;
@@ -51,7 +46,7 @@ public class MovieServiceImplement implements MovieService {
 		Pageable page = PageRequest.of(numberPage, 20);
 		Page<Movie> pageMovie = movieDao.findAll(page);
 		
-		Iterator iteratorMovies = pageMovie.getContent().iterator(); 
+		Iterator<Movie> iteratorMovies = pageMovie.getContent().iterator(); 
 		List<MovieDTO> filteredMovies = new ArrayList<>();
 		while (iteratorMovies.hasNext()) {
 			Movie movie = (Movie) iteratorMovies.next();

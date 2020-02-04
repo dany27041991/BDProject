@@ -76,9 +76,15 @@ export class MovieComponent implements OnInit {
       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
   }
 
-  getAverageRateMovie(movieLiked) {
-    if (movieLiked) {
-      return 5;
+  getAverageRateMovie(idmovie, ratingsObj) {
+    if (ratingsObj.length > 0) {
+      let total = 0;
+      ratingsObj.forEach(function (obj) {
+        if (idmovie === obj.idmovie_fk) {
+          total += obj.rating;
+        }
+      });
+      return total / 5;
     } else {
       return 0;
     }
@@ -97,6 +103,20 @@ export class MovieComponent implements OnInit {
       (httpResp: HttpErrorResponse) => {
         console.log(httpResp);
       });
+  }
+
+  setColorToHeart(addFavouritesObj) {
+    const id_user = this.user.id_user;
+    let style = {
+      'color': 'white'
+    };
+    const existFavourite = addFavouritesObj.some(obj => obj.userId === id_user);
+    if (existFavourite) {
+      style.color = 'red';
+      return style;
+    } else {
+      return style;
+    }
   }
 
   openMovieDetail(content, movie) {

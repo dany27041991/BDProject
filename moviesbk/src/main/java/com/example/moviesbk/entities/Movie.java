@@ -12,13 +12,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -26,6 +24,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@SuppressWarnings({ "deprecation", "unused" })
 @Entity
 @Table(name = "movie")
 @AllArgsConstructor @NoArgsConstructor

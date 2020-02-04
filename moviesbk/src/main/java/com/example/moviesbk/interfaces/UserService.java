@@ -4,6 +4,6 @@ import com.example.moviesbk.dtos.FavouriteFormDTO;
 
 public interface UserService {
 	
-	void insertToFavourite(FavouriteFormDTO favouriteFormDTO);
+	String insertToFavourite(FavouriteFormDTO favouriteFormDTO);
 	
 }
