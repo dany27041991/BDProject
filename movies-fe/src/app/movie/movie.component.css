@@ -34,7 +34,7 @@
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: black;
+  background: dodgerblue;
 }
 
 .star {
@@ -62,5 +62,23 @@ fa.favourite-btn:active {
 }
 
 fa.favourite-btn {
+  cursor: pointer;
+}
+
+#edit-movie-id {
+  padding-left: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin-bottom: -30px;
+  margin-left: 12.8rem;
+  z-index: 9999;
+  background: #0d0d0d;
+  width: 40px;
+  height: 50px;
+  border-radius: 3px;
+}
+
+fa#edit-fa-btn {
+  z-index: 9999 !important;
   cursor: pointer;
 }

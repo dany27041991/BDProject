@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
@@ -48,15 +50,11 @@ public class User implements Serializable{
     @NotNull @NotEmpty @NotBlank
     private String password;
     
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-      name = "add_favorite", 
-      joinColumns = @JoinColumn(name = "iduser"), 
-      inverseJoinColumns = @JoinColumn(name = "idmovie"))
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY,  orphanRemoval = true)
     @Getter @Setter
-    Set<Movie> likedMovies;
+    Set<AddFavourite> addFavourites;
     
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY,  orphanRemoval = true)
     @Getter @Setter
     Set<AddRating> ratings;
 

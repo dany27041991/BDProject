@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -110,15 +112,15 @@ public class Movie implements Serializable{
 	@NotNull @NotEmpty @NotBlank
 	private String production;
 	
-	@ManyToMany(mappedBy = "likedMovies", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.LAZY,  orphanRemoval = true)
 	@Getter @Setter
-	Set<User> liked;
+	Set<AddFavourite> addFavourites;
 	
-	@OneToMany(mappedBy = "movie", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.LAZY,  orphanRemoval = true)
 	@Getter @Setter
     Set<AddRating> ratings;
 	
-	 public Movie(String title, int year, Date released, String runtime, String genre, 
+	public Movie(String title, int year, Date released, String runtime, String genre, 
 			 String director, String writer, String actors, String plot, String language,
 			 String country, String adwards, String poster, Date dvd, String production) {
 		 this.title = title;
@@ -136,8 +138,6 @@ public class Movie implements Serializable{
 		 this.poster = poster;
 		 this.dvd = dvd;
 		 this.production = production;
-    }
-
-
+	}
 	
 }

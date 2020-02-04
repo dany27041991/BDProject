@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit {
   public mexOk: string;
   public mexFail: string;
   public isUserLoggedIn = false;
+  public isSuperUser = false;
   public name: string;
   constructor(private auth: AuthService, private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
     config.backdrop = 'static';
@@ -59,6 +60,9 @@ export class NavbarComponent implements OnInit {
         let user = new User;
         user = JSON.parse(localStorage.getItem('user'));
         this.name = user.name;
+        if (user.email === 'superuser@gmail.com') {
+          this.isSuperUser = true;
+        }
         this.router.navigate(['movies']);
       }, 1);
     } else {

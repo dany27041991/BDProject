@@ -1,7 +1,6 @@
 package com.example.moviesbk.daos;
 
 import java.sql.Date;
-import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.example.moviesbk.entities.Movie;
 
 public interface MovieDao extends JpaRepository<Movie, Integer>{
@@ -27,5 +25,8 @@ public interface MovieDao extends JpaRepository<Movie, Integer>{
 	
 	@Query(value = "SELECT COUNT(*) FROM movie ORDER BY idmovie DESC", nativeQuery = true)
     int getAllMovies();
+	
+	@Query(value = "SELECT * FROM movie WHRE idmovie = ?1", nativeQuery = true)
+    Movie getMovie(int idmovie);
 	
 }

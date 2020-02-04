@@ -7,13 +7,16 @@ import {Response} from '../classes/Response';
 export class MovieService {
   private APIAUTHURL = 'http://localhost:8090/movies/';
   constructor(private http: HttpClient) {}
+
   getAllMovies(page: number) {
-    this.http.get(this.APIAUTHURL + page).subscribe(
-      (payload: Response) => {
-        localStorage.setItem('moviesPage', JSON.stringify(payload.response));
-      },
-      (httpResp: HttpErrorResponse) => {
-        console.log(httpResp);
+    return this.http.get(this.APIAUTHURL + page);
+  }
+
+  addToFavourite(id_user, idmovie) {
+    return this.http.post(this.APIAUTHURL + 'add-favourite',
+      {
+        iduser: id_user,
+        idmovie: idmovie
       }
     );
   }

@@ -9,8 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Embeddable
-public class AddRatingKey implements Serializable{
-	
+public class AddFavouriteKey implements Serializable{
+
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "iduser_fk")

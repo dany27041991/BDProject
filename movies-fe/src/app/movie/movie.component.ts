@@ -11,6 +11,10 @@ import {
 } from '@angular/animations';
 import {ModalDismissReasons, NgbModal, NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import {StarRatingComponent} from 'ng-starrating';
+import {User} from '../classes/User';
+import {NgForm} from '@angular/forms';
+import {Response} from '../classes/Response';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-movie',
@@ -33,34 +37,37 @@ export class MovieComponent implements OnInit {
   public moviePage: MoviePageInterface;
   private page = 1;
   public errorMessage = false;
-  closeResult: string;
+  public closeResult: string;
+  public isSuperUser = false;
+  public mexUpdate = '';
   public selectedMovie: Object = {};
-  constructor(private movie: MovieService, config: NgbRatingConfig, private modalService: NgbModal) {
+  private user = new User();
+  constructor(private movieService: MovieService, config: NgbRatingConfig, private modalService: NgbModal) {
     config.max = 5;
-    movie.getAllMovies(this.page);
-    setTimeout(() => {
-      this.checkMovies();
-    }, 300);
+    this.movieService.getAllMovies(this.page).subscribe(
+      (payload: Response) => {
+        this.moviePage = <MoviePageInterface>payload.response;
+      },
+      (httpResp: HttpErrorResponse) => {
+        console.log(httpResp);
+      });
   }
 
   ngOnInit() {
-  }
-
-  checkMovies() {
-    if (JSON.parse(localStorage.getItem('moviesPage'))) {
-      this.errorMessage = false;
-      this.moviePage = JSON.parse(localStorage.getItem('moviesPage'));
-    } else {
-      this.errorMessage = true;
+    this.user = JSON.parse(localStorage.getItem('user'));
+    if (this.user.email === 'superuser@gmail.com') {
+      this.isSuperUser = true;
     }
   }
 
   getNewPageMovies() {
-    console.log(this.page);
-    this.movie.getAllMovies(this.page);
-    setTimeout(() => {
-      this.checkMovies();
-    }, 300);
+    this.movieService.getAllMovies(this.page).subscribe(
+      (payload: Response) => {
+        this.moviePage = <MoviePageInterface>payload.response;
+      },
+      (httpResp: HttpErrorResponse) => {
+        console.log(httpResp);
+      });
   }
 
   onRate($event: {oldValue: number, newValue: number, starRating: StarRatingComponent}, idmovie: number) {
@@ -69,9 +76,41 @@ export class MovieComponent implements OnInit {
       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
   }
 
+  getAverageRateMovie(movieLiked) {
+    if (movieLiked) {
+      return 5;
+    } else {
+      return 0;
+    }
+  }
+
+  updateMovie(form: NgForm) {
+    console.log('Update');
+  }
+
+  addFavourite(movie) {
+    this.movieService.addToFavourite(this.user.id_user, movie['idmovie']).subscribe(
+      (payload: Response) => {
+        console.log(payload);
+        this.getNewPageMovies();
+      },
+      (httpResp: HttpErrorResponse) => {
+        console.log(httpResp);
+      });
+  }
+
   openMovieDetail(content, movie) {
     this.selectedMovie = movie;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  openMovieUpdate(content, movie) {
+    this.selectedMovie = movie;
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-upadte-movie', size: 'lg'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

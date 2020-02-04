@@ -1,6 +1,7 @@
 package com.example.moviesbk.controllers;
 
 import com.example.moviesbk.dtos.ContactFormDTO;
+import com.example.moviesbk.dtos.FavouriteFormDTO;
 import com.example.moviesbk.dtos.LoginFormDTO;
 import com.example.moviesbk.dtos.RegistrationFormDTO;
 import com.example.moviesbk.entities.User;
@@ -9,6 +10,7 @@ import com.example.moviesbk.interfaces.ContactService;
 import com.example.moviesbk.interfaces.LoginService;
 import com.example.moviesbk.interfaces.MovieService;
 import com.example.moviesbk.interfaces.RegistrationService;
+import com.example.moviesbk.interfaces.UserService;
 import com.example.moviesbk.utils.JsonResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -34,6 +36,9 @@ public class RestController {
     
     @Autowired
     MovieService movieService;
+    
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<JsonResponseBody> loginUser(@Valid @RequestBody LoginFormDTO loginFormDTO){
@@ -112,6 +117,16 @@ public class RestController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), movieService.getFilmsListForPage(page-1)));
         } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
+        }
+    }
+    
+    @RequestMapping(value = "/movies/add-favourite", method = RequestMethod.POST)
+    public ResponseEntity<JsonResponseBody> addToFavourite(@Valid @RequestBody FavouriteFormDTO favouriteFormDTO){
+        try {
+        	userService.insertToFavourite(favouriteFormDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), "Film Added correctly in Favourite!"));
+        }catch (Exception e){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
         }
     }

@@ -1,8 +1,8 @@
 package com.example.moviesbk.daos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import com.example.moviesbk.entities.User;
 
 import java.util.List;
@@ -13,5 +13,8 @@ public interface UserDao extends JpaRepository<User, Integer> {
     List<User> getUserByEmailAndPassword(String email, String password);
 
     int countByEmail(String email);
+    
+    @Query(value = "SELECT * FROM user WHRE iduser = ?1", nativeQuery = true)
+    User getUser(int iduser);
 
 }

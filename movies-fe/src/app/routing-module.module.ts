@@ -10,6 +10,7 @@ import {UsersComponent} from './users/users.component';
 import {GeneralsComponent} from './generals/generals.component';
 import {ExampleComponent} from './example/example.component';
 import {MovieComponent} from './movie/movie.component';
+import {AddMovieComponent} from './add-movie/add-movie.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: 'movies',
     component: MovieComponent,
+    canActivate: [RouteGuardService]
+  },
+  {
+    path: 'add-movie',
+    component: AddMovieComponent,
     canActivate: [RouteGuardService]
   },
   {

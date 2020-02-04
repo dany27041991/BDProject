@@ -1,7 +1,10 @@
 package com.example.moviesbk.services;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +14,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException.Forbidden;
 
 import com.example.moviesbk.daos.MovieDao;
+import com.example.moviesbk.dtos.FavouriteFormDTO;
+import com.example.moviesbk.dtos.MovieDTO;
+import com.example.moviesbk.dtos.MoviePageDTO;
+import com.example.moviesbk.entities.AddFavourite;
+import com.example.moviesbk.entities.AddFavouriteKey;
+import com.example.moviesbk.entities.AddRating;
+import com.example.moviesbk.entities.AddRatingKey;
 import com.example.moviesbk.entities.Movie;
 import com.example.moviesbk.interfaces.MovieService;
 
@@ -37,8 +47,42 @@ public class MovieServiceImplement implements MovieService {
 	}
 
 	@Override
-	public Page<Movie> getFilmsListForPage(int numberPage) {
+	public MoviePageDTO getFilmsListForPage(int numberPage) {
 		Pageable page = PageRequest.of(numberPage, 20);
-		return movieDao.findAll(page);
+		Page<Movie> pageMovie = movieDao.findAll(page);
+		
+		Iterator iteratorMovies = pageMovie.getContent().iterator(); 
+		List<MovieDTO> filteredMovies = new ArrayList<>();
+		while (iteratorMovies.hasNext()) {
+			Movie movie = (Movie) iteratorMovies.next();
+			
+			List<AddFavouriteKey> addFavouriteKeysFiltered = new ArrayList<>();
+			Set<AddFavourite> addFavouriteSet = movie.getAddFavourites();
+			Iterator<AddFavourite> iteratorAddFavourite = addFavouriteSet.iterator();
+			while (iteratorAddFavourite.hasNext()) {
+				AddFavourite addFavourite = iteratorAddFavourite.next();
+				AddFavouriteKey addFavouriteKey = addFavourite.getId();
+				addFavouriteKeysFiltered.add(addFavouriteKey);
+			}
+			
+			List<AddRatingKey> addRatingKeysFiltered = new ArrayList<>();
+			Set<AddRating> addRatingKeysSet = movie.getRatings();
+			Iterator<AddRating> iteratorAddRating = addRatingKeysSet.iterator();
+			while (iteratorAddRating.hasNext()) {
+				AddRating addRating = iteratorAddRating.next();
+				addRatingKeysFiltered.add(addRating.getId());
+			}
+			
+			MovieDTO movieFilteredMovie = new MovieDTO(movie.getIdmovie(), movie.getTitle(), movie.getYear(), movie.getReleased(), movie.getRuntime(), 
+					movie.getGenre(), movie.getDirector(), movie.getWriter(), movie.getActors(), movie.getPlot(), 
+					movie.getLanguage(), movie.getCountry(), movie.getAdwards(), movie.getPoster(), movie.getDvd(), 
+					movie.getProduction(), addFavouriteKeysFiltered, addRatingKeysFiltered);
+			
+			filteredMovies.add(movieFilteredMovie);
+		}
+		MoviePageDTO moviePageDTO = new MoviePageDTO(filteredMovies, pageMovie.getPageable(), pageMovie.getTotalPages(),
+				pageMovie.getTotalElements(), pageMovie.getSize(), pageMovie.getNumber(), pageMovie.getNumberOfElements(),
+				pageMovie.getSort());
+		return moviePageDTO;
 	}
 }

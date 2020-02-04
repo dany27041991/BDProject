@@ -27,6 +27,7 @@ import {MovieService} from './services/movie.service';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RatingModule} from 'ng-starrating';
+import { AddMovieComponent } from './add-movie/add-movie.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {RatingModule} from 'ng-starrating';
     UsersComponent,
     GeneralsComponent,
     ExampleComponent,
-    MovieComponent
+    MovieComponent,
+    AddMovieComponent
   ],
   imports: [
     BrowserModule,

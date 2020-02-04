@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.example.moviesbk.dtos.FavouriteFormDTO;
+import com.example.moviesbk.dtos.MoviePageDTO;
 import com.example.moviesbk.entities.Movie;
 
 public interface MovieService {
@@ -12,6 +14,6 @@ public interface MovieService {
 	
 	boolean getNumbersOfMovie();
 	
-	Page<Movie> getFilmsListForPage(int numberPage);
+	MoviePageDTO getFilmsListForPage(int numberPage);
 	
 }
