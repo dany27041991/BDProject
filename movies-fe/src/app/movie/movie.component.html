@@ -22,7 +22,7 @@
                 <fa class="favourite-btn" name="heart fa-lg" [ngStyle]="setColorToHeart(movie.addFavouritesObj)" (click)="addFavourite(movie)"></fa>
               </div>
             </div>
-            <star-rating value="0" totalstars="5" checkedcolor="yellow" uncheckedcolor="white" size="24px" readonly="false" (rate)="onRate($event, movie.idmovie)"></star-rating>
+            <star-rating value="{{setRateOnStars(movie.ratingsObj)}}" totalstars="5" checkedcolor="yellow" uncheckedcolor="white" size="24px" readonly="false" (rate)="onRate($event, movie.idmovie)"></star-rating>
             <button class="btn btn-outline-primary" (click)="openMovieDetail(content, movie)">View Details</button>
           </div>
         </div>
@@ -164,7 +164,7 @@
         <div class="col-2">
           <div class="form-group small">
             <label for="year"><h6 class="text-credential label-auth">Year</h6></label>
-            <input required class="form-control" type="text" [ngModel]="selectedMovie['year']" #year="ngModel" name="year" id="year">
+            <input required class="form-control" type="number" [ngModel]="selectedMovie['year']" #year="ngModel" name="year" id="year">
           </div>
           <div *ngIf="year.dirty && year.touched && year.invalid">
             <div class="alert-danger small" *ngIf="year.errors['required']">
@@ -189,13 +189,74 @@
     </form>
     <div class="row">
       <div class="col-12">
-        <div class="alert-danger text-center">
+        <div class="alert-success text-center">
           <b>{{mexUpdate}}</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="alert-danger text-center">
+          <b>{{mexWrongUpdate}}</b>
         </div>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button [disabled]="!f.valid" type="button" class="btn btn-outline-dark" (click)="updateMovie(f); modal.close('Save click')">Update</button>
+    <button [disabled]="!f.valid" type="button" class="btn btn-outline-dark" (click)="updateMovie(f);">Update</button>
   </div>
 </ng-template>
+
+
+<ng-template #contentAddMovie let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-add-movie">Add Movie</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="row text-center ml-4 mr-5" *ngIf="!movieToAdd">
+      <div class="col-12 search">
+        <input #searchMovieTitle id="title-search-movie-id" name="searchMovieTitle" type="text" class="searchTerm" placeholder="Search By Movie Title">
+        <button type="button" class="searchButton" (click)="searchMovie(searchMovieTitle.value)"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="movieToAdd">
+      <div class="col-12">
+        <form name="addMovieForm" #a="ngForm" (ngSubmit)="addMovie(a)">
+          sdasad
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="alert-success text-center">
+          <b>{{mexAdded}}</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-1 ml-4 mr-5 mb-3">
+      <div class="col-12">
+        <div class="alert-danger text-center">
+          <b>{{mexWrongAdded}}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer" *ngIf="movieToAdd">
+    <div class="row">
+      <div class="col-12">
+        <button type="button" class="btn btn-search-movies btn-outline-primary" *ngIf="movieToAdd">Back</button>
+        <button type="button" class="btn btn-outline-danger" *ngIf="movieToAdd">Add</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<button class="btn btn-danger fixed-bottom" *ngIf="isSuperUser" style="width: 100%" (click)="openModalToAddMovie(contentAddMovie)">A&nbsp;d&nbsp;d&nbsp; M&nbsp;o&nbsp;v&nbsp;i&nbsp;e</button>

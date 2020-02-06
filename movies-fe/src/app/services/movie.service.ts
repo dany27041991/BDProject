@@ -20,4 +20,38 @@ export class MovieService {
       }
     );
   }
+
+  addToRate(id_user, idmovie, rating) {
+    return this.http.post(this.APIAUTHURL + 'add-rate',
+      {
+        iduser: id_user,
+        idmovie: idmovie,
+        rating: rating
+      }
+    );
+  }
+
+  updateMovie(form, idmovie) {
+    return this.http.post(this.APIAUTHURL + 'update',
+      {
+        'idmovie': idmovie,
+        'country': form.value.country,
+        'production': form.value.production,
+        'plot': form.value.plot,
+        'adwards': form.value.adwards,
+        'dvd': form.value.dvd,
+        'released': form.value.released,
+        'year': form.value.year,
+        'runtime': form.value.runtime
+      }
+    );
+  }
+
+  checkMovieByTitle(title) {
+    return this.http.get(this.APIAUTHURL + 'search/' + title);
+  }
+
+  searchMovieByTitle(title) {
+    return this.http.get('http://www.omdbapi.com/?apikey=660ad911&t=' + title);
+  }
 }

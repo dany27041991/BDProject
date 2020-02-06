@@ -10,12 +10,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.example.moviesbk.daos.MovieDao;
+import com.example.moviesbk.dtos.FavouriteFormDTO;
 import com.example.moviesbk.dtos.MovieDTO;
 import com.example.moviesbk.dtos.MoviePageDTO;
+import com.example.moviesbk.dtos.MovieUpdateFormDTO;
+import com.example.moviesbk.dtos.RatingFormDTO;
 import com.example.moviesbk.entities.AddFavourite;
 import com.example.moviesbk.entities.AddFavouriteKey;
 import com.example.moviesbk.entities.AddRating;
-import com.example.moviesbk.entities.AddRatingKey;
 import com.example.moviesbk.entities.Movie;
 import com.example.moviesbk.interfaces.MovieService;
 
@@ -51,21 +53,21 @@ public class MovieServiceImplement implements MovieService {
 		while (iteratorMovies.hasNext()) {
 			Movie movie = (Movie) iteratorMovies.next();
 			
-			List<AddFavouriteKey> addFavouriteKeysFiltered = new ArrayList<>();
+			List<FavouriteFormDTO> addFavouriteKeysFiltered = new ArrayList<>();
 			Set<AddFavourite> addFavouriteSet = movie.getAddFavourites();
 			Iterator<AddFavourite> iteratorAddFavourite = addFavouriteSet.iterator();
 			while (iteratorAddFavourite.hasNext()) {
 				AddFavourite addFavourite = iteratorAddFavourite.next();
 				AddFavouriteKey addFavouriteKey = addFavourite.getId();
-				addFavouriteKeysFiltered.add(addFavouriteKey);
+				addFavouriteKeysFiltered.add(new FavouriteFormDTO(addFavouriteKey.getUserId(), addFavouriteKey.getMovieId()));
 			}
 			
-			List<AddRatingKey> addRatingKeysFiltered = new ArrayList<>();
+			List<RatingFormDTO> addRatingKeysFiltered = new ArrayList<>();
 			Set<AddRating> addRatingKeysSet = movie.getRatings();
 			Iterator<AddRating> iteratorAddRating = addRatingKeysSet.iterator();
 			while (iteratorAddRating.hasNext()) {
 				AddRating addRating = iteratorAddRating.next();
-				addRatingKeysFiltered.add(addRating.getId());
+				addRatingKeysFiltered.add(new RatingFormDTO(addRating.getId().getUserId(), addRating.getId().getMovieId(), addRating.getRating()));
 			}
 			
 			MovieDTO movieFilteredMovie = new MovieDTO(movie.getIdmovie(), movie.getTitle(), movie.getYear(), movie.getReleased(), movie.getRuntime(), 
@@ -79,5 +81,24 @@ public class MovieServiceImplement implements MovieService {
 				pageMovie.getTotalElements(), pageMovie.getSize(), pageMovie.getNumber(), pageMovie.getNumberOfElements(),
 				pageMovie.getSort());
 		return moviePageDTO;
+	}
+
+	@Override
+	public String updateMovie(MovieUpdateFormDTO movieUpdateFormDTO) {
+		movieDao.updateMovie(movieUpdateFormDTO.getIdmovie(), movieUpdateFormDTO.getCountry(), movieUpdateFormDTO.getProduction(), 
+				movieUpdateFormDTO.getPlot(), movieUpdateFormDTO.getAdwards(), movieUpdateFormDTO.getDvd(), movieUpdateFormDTO.getReleased(), 
+				movieUpdateFormDTO.getYear(), movieUpdateFormDTO.getRuntime());
+		return null;
+	}
+
+	@Override
+	public boolean searchMovieByTitle(String title) {
+		int count = movieDao.searchMovieByTitle(title.trim());
+		if(count>0) {
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 }

@@ -3,6 +3,7 @@ package com.example.moviesbk.controllers;
 import com.example.moviesbk.dtos.ContactFormDTO;
 import com.example.moviesbk.dtos.FavouriteFormDTO;
 import com.example.moviesbk.dtos.LoginFormDTO;
+import com.example.moviesbk.dtos.MovieUpdateFormDTO;
 import com.example.moviesbk.dtos.RatingFormDTO;
 import com.example.moviesbk.dtos.RegistrationFormDTO;
 import com.example.moviesbk.entities.User;
@@ -134,8 +135,26 @@ public class RestController {
     @RequestMapping(value = "/movies/add-rate", method = RequestMethod.POST)
     public ResponseEntity<JsonResponseBody> addRate(@Valid @RequestBody RatingFormDTO ratingFormDTO){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), null));
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), userService.insertRating(ratingFormDTO)));
         }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
+        }
+    }
+    
+    @RequestMapping(value = "/movies/update", method = RequestMethod.POST)
+    public ResponseEntity<JsonResponseBody> updateMovie(@Valid @RequestBody MovieUpdateFormDTO movieUpdateFormDTO){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), movieService.updateMovie(movieUpdateFormDTO)));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
+        }
+    }
+    
+    @RequestMapping(value = "/movies/search/{title}", method = RequestMethod.GET)
+    public ResponseEntity<JsonResponseBody> searchMovieByTitle(@PathVariable(name = "title") String title) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), movieService.searchMovieByTitle(title)));
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
         }
     }

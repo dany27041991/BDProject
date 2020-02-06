@@ -29,4 +29,12 @@ public interface MovieDao extends JpaRepository<Movie, Integer>{
 	@Query(value = "SELECT * FROM movie WHRE idmovie = ?1", nativeQuery = true)
     Movie getMovie(int idmovie);
 	
+	@Modifying
+    @Transactional
+    @Query(value = "UPDATE movie SET country = ?2, production = ?3, plot = ?4, adwards = ?5, dvd = ?6, released = ?7, year = ?8, runtime = ?9 WHERE idmovie = ?1", nativeQuery = true)
+    void updateMovie(Integer idmovie, String country, String production, String plot, String adwards, Date dvd, Date released, Integer year, String runtime);
+	
+	@Query(value = "SELECT COUNT(*) FROM movie WHERE UPPER(title) LIKE UPPER(?1)", nativeQuery = true)
+    int searchMovieByTitle(String title);
+	
 }

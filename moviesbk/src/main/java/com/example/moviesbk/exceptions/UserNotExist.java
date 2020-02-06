@@ -1,5 +1,10 @@
 package com.example.moviesbk.exceptions;
 
 public class UserNotExist extends Exception {
-    public UserNotExist(String errorMessage){ super(errorMessage); }
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public UserNotExist(String errorMessage){ super(errorMessage); }
 }

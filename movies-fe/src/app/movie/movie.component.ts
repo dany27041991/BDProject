@@ -15,6 +15,7 @@ import {User} from '../classes/User';
 import {NgForm} from '@angular/forms';
 import {Response} from '../classes/Response';
 import {HttpErrorResponse} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-movie',
@@ -36,20 +37,23 @@ import {HttpErrorResponse} from '@angular/common/http';
 export class MovieComponent implements OnInit {
   public moviePage: MoviePageInterface;
   private page = 1;
-  public errorMessage = false;
   public closeResult: string;
   public isSuperUser = false;
   public mexUpdate = '';
+  public mexWrongUpdate = '';
   public selectedMovie: Object = {};
   private user = new User();
-  constructor(private movieService: MovieService, config: NgbRatingConfig, private modalService: NgbModal) {
+  public movieToAdd: Object = null;
+  public mexAdded = '';
+  public mexWrongAdded = '';
+  constructor(private movieService: MovieService, config: NgbRatingConfig, private modalService: NgbModal, private router: Router) {
     config.max = 5;
     this.movieService.getAllMovies(this.page).subscribe(
       (payload: Response) => {
         this.moviePage = <MoviePageInterface>payload.response;
       },
       (httpResp: HttpErrorResponse) => {
-        console.log(httpResp);
+        this.router.navigate(['error']);
       });
   }
 
@@ -66,42 +70,108 @@ export class MovieComponent implements OnInit {
         this.moviePage = <MoviePageInterface>payload.response;
       },
       (httpResp: HttpErrorResponse) => {
-        console.log(httpResp);
+        this.router.navigate(['error']);
       });
   }
 
   onRate($event: {oldValue: number, newValue: number, starRating: StarRatingComponent}, idmovie: number) {
-    console.log(idmovie);
-    console.log(`Old Value:${$event.oldValue}, New Value: ${$event.newValue}, Checked Color: ${$event.starRating.checkedcolor}, 
-      Unchecked Color: ${$event.starRating.uncheckedcolor}`);
+    this.movieService.addToRate(this.user.id_user, idmovie, $event.newValue).subscribe(
+      (payload: Response) => {
+        this.getNewPageMovies();
+      },
+      (httpResp: HttpErrorResponse) => {
+        this.router.navigate(['error']);
+      });
+  }
+
+  setRateOnStars(ratingsObj) {
+    let rating = 0;
+    const id_user = this.user.id_user;
+    ratingsObj.forEach(function (obj) {
+      if (obj.iduser === id_user) {
+        rating = obj.rating;
+      }
+    });
+    return rating;
   }
 
   getAverageRateMovie(idmovie, ratingsObj) {
     if (ratingsObj.length > 0) {
       let total = 0;
+      let count = 0;
       ratingsObj.forEach(function (obj) {
-        if (idmovie === obj.idmovie_fk) {
+        if (idmovie === obj.idmovie) {
           total += obj.rating;
+          count++;
         }
       });
-      return total / 5;
+      return total / count;
     } else {
       return 0;
     }
   }
 
   updateMovie(form: NgForm) {
-    console.log('Update');
+    this.movieService.updateMovie(form, this.selectedMovie['idmovie']).subscribe(
+      async (payload: Response) => {
+        this.mexUpdate = 'Updated Successfully!';
+        await setTimeout(() => {
+          this.modalService.dismissAll();
+          this.mexUpdate = '';
+          this.getNewPageMovies();
+        }, 2000);
+      },
+      async (httpResp: HttpErrorResponse) => {
+        this.mexWrongUpdate = 'A Problem Occurred. Try Later!';
+        await setTimeout(() => {
+          this.modalService.dismissAll();
+          this.mexWrongUpdate = '';
+        }, 2000);
+      });
+  }
+
+  async searchMovie(title) {
+    if (title) {
+      this.movieService.checkMovieByTitle(title).subscribe(
+        async (payload: Response) => {
+          if (!payload.response) {
+            this.movieService.searchMovieByTitle(title).subscribe(
+              (jsonMovie) => {
+                if (jsonMovie['Response'] === 'False') {
+                  this.mexWrongAdded = 'Sorry, movie not found!';
+                } else {
+                  this.movieToAdd = jsonMovie['Response'];
+                  console.log(jsonMovie['Response']);
+                }
+                console.log(jsonMovie);
+              },
+              (httpResp: HttpErrorResponse) => {
+                console.log(httpResp);
+              });
+          } else {
+            this.mexWrongAdded = 'Sorry, but this movie already exists!';
+            await setTimeout(() => {}, 2000);
+          }
+        },
+        (httpResp: HttpErrorResponse) => {
+          console.log(httpResp);
+        });
+    }
+    this.mexWrongAdded = '';
+    this.movieToAdd = null;
+  }
+
+  addMovie(form: NgForm) {
+
   }
 
   addFavourite(movie) {
     this.movieService.addToFavourite(this.user.id_user, movie['idmovie']).subscribe(
       (payload: Response) => {
-        console.log(payload);
         this.getNewPageMovies();
       },
       (httpResp: HttpErrorResponse) => {
-        console.log(httpResp);
+        this.router.navigate(['error']);
       });
   }
 
@@ -110,7 +180,7 @@ export class MovieComponent implements OnInit {
     let style = {
       'color': 'white'
     };
-    const existFavourite = addFavouritesObj.some(obj => obj.userId === id_user);
+    const existFavourite = addFavouritesObj.some(obj => obj.iduser === id_user);
     if (existFavourite) {
       style.color = 'red';
       return style;
@@ -130,7 +200,15 @@ export class MovieComponent implements OnInit {
 
   openMovieUpdate(content, movie) {
     this.selectedMovie = movie;
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-upadte-movie', size: 'lg'}).result.then((result) => {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-update-movie', size: 'lg'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  openModalToAddMovie(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-add-movie', size: 'lg'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

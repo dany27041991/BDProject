@@ -1,11 +1,7 @@
 package com.example.moviesbk.interfaces;
 
-import java.util.List;
-
-import org.springframework.data.domain.Page;
-
-import com.example.moviesbk.dtos.FavouriteFormDTO;
 import com.example.moviesbk.dtos.MoviePageDTO;
+import com.example.moviesbk.dtos.MovieUpdateFormDTO;
 import com.example.moviesbk.entities.Movie;
 
 public interface MovieService {
@@ -15,5 +11,9 @@ public interface MovieService {
 	boolean getNumbersOfMovie();
 	
 	MoviePageDTO getFilmsListForPage(int numberPage);
+	
+	String updateMovie(MovieUpdateFormDTO movieUpdateFormDTO);
+	
+	boolean searchMovieByTitle(String title);
 	
 }

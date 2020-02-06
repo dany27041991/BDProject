@@ -11,6 +11,7 @@ import {GeneralsComponent} from './generals/generals.component';
 import {ExampleComponent} from './example/example.component';
 import {MovieComponent} from './movie/movie.component';
 import {AddMovieComponent} from './add-movie/add-movie.component';
+import {ErrorComponent} from './error/error.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
     path: 'add-movie',
     component: AddMovieComponent,
     canActivate: [RouteGuardService]
+  },
+  {
+    path: 'error',
+    component: ErrorComponent
   },
   {
     path: 'myself',

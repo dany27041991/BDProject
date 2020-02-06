@@ -1,21 +1,14 @@
 package com.example.moviesbk;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.client.RestTemplate;
-
-import com.example.moviesbk.dtos.RestMovieDTO;
 import com.example.moviesbk.entities.Movie;
 import com.example.moviesbk.interfaces.MovieService;
 import com.example.moviesbk.utils.DateFormatByJson;
@@ -34,6 +27,7 @@ public class AddrbkApplication implements CommandLineRunner{
 		SpringApplication.run(AddrbkApplication.class, args);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void run(String...strings) throws Exception {
 		try {
@@ -148,9 +142,8 @@ public class AddrbkApplication implements CommandLineRunner{
 					ObjectMapper objectMapper = new ObjectMapper();
 				    String movieJson = restTemplate.getForObject(uri, String.class);
 				    
-				    LinkedHashMap<String, String> movie = (LinkedHashMap<String, String>) objectMapper.readValue(movieJson, Object.class);
+					LinkedHashMap<String, String> movie = (LinkedHashMap<String, String>) objectMapper.readValue(movieJson, Object.class);
 				    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-				    DateFormatByJson dateFormmated = new DateFormatByJson();
 				    Date dateReleased = Date.valueOf(DateFormatByJson.dateFormattedByJson(movie.get("Released"))); 
 				    Date dateDvd = Date.valueOf(DateFormatByJson.dateFormattedByJson(movie.get("DVD")));  
 				    movieService.saveMovie(new Movie(movie.get("Title"), Integer.parseInt(movie.get("Year")), dateReleased,

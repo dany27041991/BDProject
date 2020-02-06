@@ -2,10 +2,6 @@ package com.example.moviesbk.dtos;
 
 import java.sql.Date;
 import java.util.List;
-
-import com.example.moviesbk.entities.AddFavouriteKey;
-import com.example.moviesbk.entities.AddRatingKey;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -60,15 +56,15 @@ public class MovieDTO {
 	private String production;
 	
 	@Getter @Setter
-	List<AddFavouriteKey> addFavouritesObj;
+	List<FavouriteFormDTO> addFavouritesObj;
 	
 	@Getter @Setter
-	List<AddRatingKey> ratingsObj;
+	List<RatingFormDTO> ratingsObj;
 	
 	public MovieDTO(int idmovie, String title, int year, Date released, String runtime, String genre, 
 			 String director, String writer, String actors, String plot, String language,
 			 String country, String adwards, String poster, Date dvd, String production,
-			 List<AddFavouriteKey> addFavourites, List<AddRatingKey> ratings) {
+			 List<FavouriteFormDTO> addFavourites, List<RatingFormDTO> ratings) {
 		this.idmovie = idmovie; 
 		this.title = title;
 		this.year = year;
