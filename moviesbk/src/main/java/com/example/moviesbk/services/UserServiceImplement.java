@@ -45,4 +45,10 @@ public class UserServiceImplement implements UserService{
 		}
 	}
 
+	@Override
+	public String removeFromFavourite(FavouriteFormDTO favouriteFormDTO) {
+		addFavouriteDao.deleteFavourite(favouriteFormDTO.getIduser(), favouriteFormDTO.getIdmovie());
+		return "Removed from favourite!";
+	}
+
 }

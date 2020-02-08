@@ -183,5 +183,23 @@ public class RestController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
         }
     }
+    
+    @RequestMapping(value = "/movies/favourite/{iduser}", method = RequestMethod.GET)
+    public ResponseEntity<JsonResponseBody> getFavouritesMovies(@PathVariable(name = "iduser") int iduser) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), movieService.getFavouritesMovies(iduser)));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
+        }
+    }
+    
+    @RequestMapping(value = "/movies/remove-from-favourite", method = RequestMethod.POST)
+    public ResponseEntity<JsonResponseBody> removeMovieFromFavourite(@Valid @RequestBody FavouriteFormDTO favouriteFormDTO){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), userService.removeFromFavourite(favouriteFormDTO)));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
+        }
+    }
 
 }

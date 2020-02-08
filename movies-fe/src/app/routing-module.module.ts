@@ -12,6 +12,7 @@ import {ExampleComponent} from './example/example.component';
 import {MovieComponent} from './movie/movie.component';
 import {AddMovieComponent} from './add-movie/add-movie.component';
 import {ErrorComponent} from './error/error.component';
+import {FavouriteMovieComponent} from './favourite-movie/favourite-movie.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,11 @@ const routes: Routes = [
   {
     path: 'add-movie',
     component: AddMovieComponent,
+    canActivate: [RouteGuardService]
+  },
+  {
+    path: 'movies/favourite',
+    component: FavouriteMovieComponent,
     canActivate: [RouteGuardService]
   },
   {

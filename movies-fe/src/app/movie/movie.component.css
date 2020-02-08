@@ -114,3 +114,8 @@ fa#edit-fa-btn {
 .btn-search-movies {
   margin-right: 5px;
 }
+
+.container-fluid {
+  background: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,0)),
+  url('../../assets/images/background-movies.jpg') no-repeat fixed center;
+}

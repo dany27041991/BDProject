@@ -1,6 +1,7 @@
 package com.example.moviesbk.daos;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,5 +42,8 @@ public interface MovieDao extends JpaRepository<Movie, Integer>{
     @Transactional
     @Query(value = "DELETE FROM movie WHERE idmovie = ?1", nativeQuery = true)
     void deleteMovie(Integer idmovie);
+	
+	@Query(value = "SELECT * FROM movie, add_favourite WHERE movie.idmovie = add_favourite.idmovie_fk AND add_favourite.iduser_fk = ?1", nativeQuery = true)
+    List<Movie> getFavoritesMovies(int iduser);
 	
 }

@@ -31,6 +31,7 @@ import { AddMovieComponent } from './add-movie/add-movie.component';
 import { ErrorComponent } from './error/error.component';
 import { MovieViewerComponent } from './movie-viewer/movie-viewer.component';
 import {DatePipe} from '@angular/common';
+import { FavouriteMovieComponent } from './favourite-movie/favourite-movie.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {DatePipe} from '@angular/common';
     MovieComponent,
     AddMovieComponent,
     ErrorComponent,
-    MovieViewerComponent
+    MovieViewerComponent,
+    FavouriteMovieComponent
   ],
   imports: [
     BrowserModule,

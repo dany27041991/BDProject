@@ -1,5 +1,7 @@
 package com.example.moviesbk.interfaces;
 
+import java.util.List;
+
 import com.example.moviesbk.dtos.MovieDTO;
 import com.example.moviesbk.dtos.MoviePageDTO;
 import com.example.moviesbk.dtos.MovieUpdateFormDTO;
@@ -20,5 +22,7 @@ public interface MovieService {
 	void insertMovie(MovieDTO movieDTO);
 	
 	String deleteMovie(int idmovie);
+	
+	List<MovieDTO> getFavouritesMovies(int iduser);
 	
 }

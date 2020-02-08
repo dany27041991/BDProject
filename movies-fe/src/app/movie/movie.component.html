@@ -1,5 +1,4 @@
-<div class="container-fluid" style=" background: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,0)),
-    url('../../assets/images/background-movies.jpg') no-repeat fixed center;">
+<div class="container-fluid">
   <div class="row p-5 mb-2 text-center" *ngIf="moviePage">
     <div class="col-3 mb-1 text-center" [@flyInOut]="'in'" *ngFor="let movie of moviePage.content | paginate: { itemsPerPage: 20, currentPage: page, id: 'list-movies-id', totalItems: moviePage.totalElements}">
       <div class="card p-2" style="width: 16rem; height: 36rem;">

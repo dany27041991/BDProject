@@ -109,12 +109,47 @@ public class MovieServiceImplement implements MovieService {
 				movieDTO.getGenre(), movieDTO.getDirector(), movieDTO.getWriter(), movieDTO.getActors(), movieDTO.getPlot(),
 				movieDTO.getLanguage(), movieDTO.getCountry(), movieDTO.getAdwards(), movieDTO.getPoster(), movieDTO.getDvd(),
 				movieDTO.getProduction());
-		
 	}
 
 	@Override
 	public String deleteMovie(int idmovie) {
 		movieDao.deleteMovie(idmovie);
 		return "Deleted successfully!";
+	}
+
+	@Override
+	public List<MovieDTO> getFavouritesMovies(int iduser) {
+		List<Movie> moviesFavouriteList = movieDao.getFavoritesMovies(iduser);
+		List<MovieDTO> moviesFavouriteFiltered = new ArrayList<>();
+		
+		Iterator<Movie> iteratorMovies = moviesFavouriteList.iterator();
+		while (iteratorMovies.hasNext()) {
+			Movie movie = (Movie) iteratorMovies.next();
+			
+			List<FavouriteFormDTO> addFavouriteKeysFiltered = new ArrayList<>();
+			Set<AddFavourite> addFavouriteSet = movie.getAddFavourites();
+			Iterator<AddFavourite> iteratorAddFavourite = addFavouriteSet.iterator();
+			while (iteratorAddFavourite.hasNext()) {
+				AddFavourite addFavourite = iteratorAddFavourite.next();
+				AddFavouriteKey addFavouriteKey = addFavourite.getId();
+				addFavouriteKeysFiltered.add(new FavouriteFormDTO(addFavouriteKey.getUserId(), addFavouriteKey.getMovieId()));
+			}
+			
+			List<RatingFormDTO> addRatingKeysFiltered = new ArrayList<>();
+			Set<AddRating> addRatingKeysSet = movie.getRatings();
+			Iterator<AddRating> iteratorAddRating = addRatingKeysSet.iterator();
+			while (iteratorAddRating.hasNext()) {
+				AddRating addRating = iteratorAddRating.next();
+				addRatingKeysFiltered.add(new RatingFormDTO(addRating.getId().getUserId(), addRating.getId().getMovieId(), addRating.getRating()));
+			}
+			
+			MovieDTO movieFilteredMovie = new MovieDTO(movie.getIdmovie(), movie.getTitle(), movie.getYear(), movie.getReleased(), movie.getRuntime(), 
+					movie.getGenre(), movie.getDirector(), movie.getWriter(), movie.getActors(), movie.getPlot(), 
+					movie.getLanguage(), movie.getCountry(), movie.getAdwards(), movie.getPoster(), movie.getDvd(), 
+					movie.getProduction(), addFavouriteKeysFiltered, addRatingKeysFiltered);
+			
+			moviesFavouriteFiltered.add(movieFilteredMovie);
+		}
+		return moviesFavouriteFiltered;
 	}
 }

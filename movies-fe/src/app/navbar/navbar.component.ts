@@ -67,7 +67,6 @@ export class NavbarComponent implements OnInit {
         if (user.email === 'superuser@gmail.com') {
           this.isSuperUser = true;
         }
-        this.router.navigate(['movies']);
       }, 1);
     } else {
       this.isUserLoggedIn = false;

@@ -62,4 +62,15 @@ export class MovieService {
   deleteMovie(idmovie) {
     return this.http.get(this.APIAUTHURL + 'delete-movie/' + idmovie);
   }
+
+  getFavouriteMovies(iduser: number) {
+    return this.http.get(this.APIAUTHURL + 'favourite/' + iduser);
+  }
+
+  removeMovieFromFavourite(idmovie, iduser) {
+    return this.http.post(this.APIAUTHURL + 'remove-from-favourite', {
+      'iduser': iduser,
+      'idmovie': idmovie
+    });
+  }
 }
