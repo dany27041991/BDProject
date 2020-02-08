@@ -1,5 +1,6 @@
 package com.example.moviesbk.interfaces;
 
+import com.example.moviesbk.dtos.MovieDTO;
 import com.example.moviesbk.dtos.MoviePageDTO;
 import com.example.moviesbk.dtos.MovieUpdateFormDTO;
 import com.example.moviesbk.entities.Movie;
@@ -15,5 +16,9 @@ public interface MovieService {
 	String updateMovie(MovieUpdateFormDTO movieUpdateFormDTO);
 	
 	boolean searchMovieByTitle(String title);
+	
+	void insertMovie(MovieDTO movieDTO);
+	
+	String deleteMovie(int idmovie);
 	
 }

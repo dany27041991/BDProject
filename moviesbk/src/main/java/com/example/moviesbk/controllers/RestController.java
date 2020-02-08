@@ -3,9 +3,11 @@ package com.example.moviesbk.controllers;
 import com.example.moviesbk.dtos.ContactFormDTO;
 import com.example.moviesbk.dtos.FavouriteFormDTO;
 import com.example.moviesbk.dtos.LoginFormDTO;
+import com.example.moviesbk.dtos.MovieDTO;
 import com.example.moviesbk.dtos.MovieUpdateFormDTO;
 import com.example.moviesbk.dtos.RatingFormDTO;
 import com.example.moviesbk.dtos.RegistrationFormDTO;
+import com.example.moviesbk.entities.Movie;
 import com.example.moviesbk.entities.User;
 import com.example.moviesbk.exceptions.UserNotExist;
 import com.example.moviesbk.interfaces.ContactService;
@@ -22,6 +24,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -154,6 +158,27 @@ public class RestController {
     public ResponseEntity<JsonResponseBody> searchMovieByTitle(@PathVariable(name = "title") String title) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), movieService.searchMovieByTitle(title)));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
+        }
+    }
+    
+    @RequestMapping(value = "/movies/add", method = RequestMethod.POST)
+    public ResponseEntity<JsonResponseBody> addMovie(@Valid @RequestBody String movie){
+        try {
+        	ObjectMapper objectMapper = new ObjectMapper();
+        	MovieDTO movieDTO = objectMapper.readValue(movie, MovieDTO.class);
+        	movieService.insertMovie(movieDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), "Added correctly!"));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
+        }
+    }
+    
+    @RequestMapping(value = "/movies/delete-movie/{idmovie}", method = RequestMethod.GET)
+    public ResponseEntity<JsonResponseBody> deleteMovie(@PathVariable(name = "idmovie") int idmovie) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), movieService.deleteMovie(idmovie)));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
         }

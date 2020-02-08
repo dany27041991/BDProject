@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.example.moviesbk.daos.MovieDao;
 import com.example.moviesbk.dtos.FavouriteFormDTO;
@@ -45,7 +46,7 @@ public class MovieServiceImplement implements MovieService {
 
 	@Override
 	public MoviePageDTO getFilmsListForPage(int numberPage) {
-		Pageable page = PageRequest.of(numberPage, 20);
+		Pageable page = PageRequest.of(numberPage, 20, Sort.by("idmovie").descending());
 		Page<Movie> pageMovie = movieDao.findAll(page);
 		
 		Iterator<Movie> iteratorMovies = pageMovie.getContent().iterator(); 
@@ -88,7 +89,7 @@ public class MovieServiceImplement implements MovieService {
 		movieDao.updateMovie(movieUpdateFormDTO.getIdmovie(), movieUpdateFormDTO.getCountry(), movieUpdateFormDTO.getProduction(), 
 				movieUpdateFormDTO.getPlot(), movieUpdateFormDTO.getAdwards(), movieUpdateFormDTO.getDvd(), movieUpdateFormDTO.getReleased(), 
 				movieUpdateFormDTO.getYear(), movieUpdateFormDTO.getRuntime());
-		return null;
+		return "Movie Updated";
 	}
 
 	@Override
@@ -100,5 +101,20 @@ public class MovieServiceImplement implements MovieService {
 			return false;
 		}
 		
+	}
+
+	@Override
+	public void insertMovie(MovieDTO movieDTO) {
+		movieDao.addMovie(movieDTO.getTitle(), movieDTO.getYear(), movieDTO.getReleased(), movieDTO.getRuntime(), 
+				movieDTO.getGenre(), movieDTO.getDirector(), movieDTO.getWriter(), movieDTO.getActors(), movieDTO.getPlot(),
+				movieDTO.getLanguage(), movieDTO.getCountry(), movieDTO.getAdwards(), movieDTO.getPoster(), movieDTO.getDvd(),
+				movieDTO.getProduction());
+		
+	}
+
+	@Override
+	public String deleteMovie(int idmovie) {
+		movieDao.deleteMovie(idmovie);
+		return "Deleted successfully!";
 	}
 }

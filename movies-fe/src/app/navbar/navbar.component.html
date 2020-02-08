@@ -17,9 +17,16 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/movies">Display</a>
-          <a class="dropdown-item" href="/add-movie" *ngIf="isSuperUser">Add New</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Favourite</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" *ngIf="isUserLoggedIn && isSuperUser">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUsers" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Users
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/users">Delete</a>
         </div>
       </li>
       <li class="nav-item dropdown d-lg-none">

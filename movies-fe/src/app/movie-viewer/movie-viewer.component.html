@@ -1,0 +1,23 @@
+<div class="row ml-1 mr-1" *ngIf="selectedMovie">
+  <div class="col-6">
+    <div class="row"><p><b>Genre:</b>&nbsp; {{selectedMovie['genre']}}</p></div>
+    <div class="row"><p><b>Year:</b>&nbsp; {{selectedMovie['year']}}&nbsp; <b>Runtime:</b>&nbsp; {{selectedMovie['runtime']}}</p></div>
+    <div class="row"><p><b>Language:</b>&nbsp; {{selectedMovie['language']}}</p></div>
+    <div class="row"><p><b>Country:</b>&nbsp; {{selectedMovie['country']}}</p></div>
+    <div class="row"><p><b>Production:</b>&nbsp; {{selectedMovie['production']}}</p></div>
+    <div class="row"><p><b>Released:</b>&nbsp; {{selectedMovie['released']}}</p></div>
+    <div class="row"><p><b>Dvd:</b>&nbsp; {{selectedMovie['dvd']}}</p></div>
+    <div class="row"><p><b>Director:</b>&nbsp; {{selectedMovie['director']}}</p></div>
+  </div>
+  <div class="col-6">
+    <img class="card-img-top" src="{{selectedMovie['poster']}}" alt="{{selectedMovie['poster']}}" style="width: 210px;">
+  </div>
+</div>
+<div class="row ml-1 mr-1" *ngIf="selectedMovie">
+  <div class="col-12">
+    <div class="row"><p><b>Writer:</b>&nbsp; {{selectedMovie['writer']}}</p></div>
+    <div class="row"><p><b>Actors:</b>&nbsp; {{selectedMovie['actors']}}</p></div>
+    <div class="row"><p><b>Plot:</b>&nbsp; {{selectedMovie['plot']}}</p></div>
+    <div class="row"><p><b>Adwards:</b>&nbsp; {{selectedMovie['adwards']}}</p></div>
+  </div>
+</div>

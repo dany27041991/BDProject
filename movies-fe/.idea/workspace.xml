@@ -68,8 +68,8 @@
       <file leaf-file-name="navbar.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/navbar/navbar.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="66" column="12" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="66" selection-end-column="12" />
+            <state relative-caret-position="360">
+              <caret line="30" column="25" lean-forward="true" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -78,8 +78,8 @@
       <file leaf-file-name="movie.service.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/services/movie.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="53" column="20" lean-forward="false" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="20" />
+            <state relative-caret-position="438">
+              <caret line="62" column="56" lean-forward="false" selection-start-line="62" selection-start-column="44" selection-end-line="62" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -88,8 +88,8 @@
       <file leaf-file-name="movie.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/movie/movie.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="143" column="53" lean-forward="true" selection-start-line="143" selection-start-column="53" selection-end-line="143" selection-end-column="53" />
+            <state relative-caret-position="317">
+              <caret line="283" column="29" lean-forward="false" selection-start-line="283" selection-start-column="29" selection-end-line="283" selection-end-column="29" />
               <folding>
                 <element signature="e#0#77#0" expanded="true" />
               </folding>
@@ -97,30 +97,43 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="navbar.component.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/navbar/navbar.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="28" column="47" lean-forward="false" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="movie.component.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/movie/movie.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="243" column="39" lean-forward="false" selection-start-line="243" selection-start-column="39" selection-end-line="243" selection-end-column="39" />
+            <state relative-caret-position="439">
+              <caret line="189" column="122" lean-forward="false" selection-start-line="189" selection-start-column="122" selection-end-line="189" selection-end-column="122" />
               <folding>
-                <element signature="n#style#0;n#button#0;n#!!top" expanded="true" />
-                <element signature="e#11654#11660#0" expanded="true" />
-                <element signature="e#11661#11667#0" expanded="true" />
-                <element signature="e#11668#11674#0" expanded="true" />
-                <element signature="e#11676#11682#0" expanded="true" />
-                <element signature="e#11683#11689#0" expanded="true" />
-                <element signature="e#11690#11696#0" expanded="true" />
-                <element signature="e#11697#11703#0" expanded="true" />
+                <element signature="e#8675#8681#0" expanded="true" />
+                <element signature="e#8681#8687#0" expanded="true" />
+                <element signature="e#8687#8693#0" expanded="true" />
+                <element signature="e#8833#8839#0" expanded="true" />
+                <element signature="e#10914#10920#0" expanded="true" />
+                <element signature="e#10921#10927#0" expanded="true" />
+                <element signature="e#10928#10934#0" expanded="true" />
+                <element signature="e#10936#10942#0" expanded="true" />
+                <element signature="e#10943#10949#0" expanded="true" />
+                <element signature="e#10950#10956#0" expanded="true" />
+                <element signature="e#10957#10963#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="movie.component.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="movie.component.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/movie/movie.component.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
-              <caret line="99" column="1" lean-forward="true" selection-start-line="99" selection-start-column="1" selection-end-line="99" selection-end-column="1" />
+              <caret line="99" column="1" lean-forward="false" selection-start-line="99" selection-start-column="1" selection-end-line="99" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -156,8 +169,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/app/signin/signin.component.html" />
-        <option value="$PROJECT_DIR$/src/app/interfaces/JsonResponseBody.ts" />
         <option value="$PROJECT_DIR$/src/app/interfaces/ResponseInterface.ts" />
         <option value="$PROJECT_DIR$/src/app/signup/signup.component.css" />
         <option value="$PROJECT_DIR$/src/app/classes/Response.ts" />
@@ -192,21 +203,23 @@
         <option value="$PROJECT_DIR$/src/app/footer/footer.component.html" />
         <option value="$PROJECT_DIR$/src/app/header/header.component.html" />
         <option value="$PROJECT_DIR$/src/app/services/auth.service.ts" />
-        <option value="$PROJECT_DIR$/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/src/app/footer/footer.component.css" />
         <option value="$PROJECT_DIR$/src/app/app.component.css" />
-        <option value="$PROJECT_DIR$/src/app/navbar/navbar.component.html" />
         <option value="$PROJECT_DIR$/src/app/interfaces/UserInterface.ts" />
         <option value="$PROJECT_DIR$/src/app/classes/User.ts" />
         <option value="$PROJECT_DIR$/src/app/interfaces/MoviePageInterface.ts" />
-        <option value="$PROJECT_DIR$/src/app/navbar/navbar.component.ts" />
         <option value="$PROJECT_DIR$/src/app/routing-module.module.ts" />
         <option value="$PROJECT_DIR$/src/app/error/error.component.css" />
         <option value="$PROJECT_DIR$/src/app/error/error.component.html" />
+        <option value="$PROJECT_DIR$/src/app/movie/movie.component.css" />
+        <option value="$PROJECT_DIR$/src/app/movie-viewer/movie-viewer.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/movie-viewer/movie-viewer.component.html" />
+        <option value="$PROJECT_DIR$/src/app/app.module.ts" />
+        <option value="$PROJECT_DIR$/src/app/movie/movie.component.html" />
         <option value="$PROJECT_DIR$/src/app/services/movie.service.ts" />
         <option value="$PROJECT_DIR$/src/app/movie/movie.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/movie/movie.component.html" />
-        <option value="$PROJECT_DIR$/src/app/movie/movie.component.css" />
+        <option value="$PROJECT_DIR$/src/app/navbar/navbar.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/navbar/navbar.component.html" />
       </list>
     </option>
   </component>
@@ -222,11 +235,11 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
-    <option name="x" value="4" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="44" />
     <option name="y" value="23" />
-    <option name="width" value="1404" />
-    <option name="height" value="838" />
+    <option name="width" value="1440" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -246,8 +259,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -271,14 +284,21 @@
               <item name="movies-fe" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="error" type="462c0819:PsiDirectoryNode" />
+              <item name="movie" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="movies-fe" type="b2602c69:ProjectViewProjectNode" />
               <item name="movies-fe" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="movie" type="462c0819:PsiDirectoryNode" />
+              <item name="movie-viewer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movies-fe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movies-fe" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="navbar" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -448,17 +468,19 @@
       <workItem from="1580849314078" duration="2825000" />
       <workItem from="1580932760504" duration="4716000" />
       <workItem from="1581016207989" duration="8130000" />
+      <workItem from="1581071604229" duration="188000" />
+      <workItem from="1581100742786" duration="6777000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172569000" />
+    <option name="totallyTimeSpent" value="179534000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="23" width="1404" height="838" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="877" extended-state="6" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24501425" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23888889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -466,7 +488,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28133333" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26742712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -523,21 +545,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es6.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="20842" column="27" lean-forward="true" selection-start-line="20842" selection-start-column="27" selection-end-line="20842" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/compare-validator.directive.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="5" column="24" lean-forward="false" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/assets/images/movie-header.jpg" />
     <entry file="file://$PROJECT_DIR$/src/assets/images/update.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -661,13 +668,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="11" lean-forward="true" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/footer/footer.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-179">
@@ -731,17 +731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/navbar/navbar.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="54" column="6" lean-forward="false" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
-          <folding>
-            <element signature="n#style#0;n#fa#0;n#button#0;n#nav#0;n#!!top" expanded="false" />
-            <element signature="e#2757#2763#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/interfaces/UserInterface.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -753,7 +742,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -761,7 +749,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="47" column="5" lean-forward="false" selection-start-line="40" selection-start-column="4" selection-end-line="47" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -807,57 +794,101 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="14" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/navbar/navbar.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="66" column="12" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="66" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/services/movie.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="53" column="20" lean-forward="false" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/movie/movie.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="143" column="53" lean-forward="true" selection-start-line="143" selection-start-column="53" selection-end-line="143" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#77#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/movie/movie.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="243" column="39" lean-forward="false" selection-start-line="243" selection-start-column="39" selection-end-line="243" selection-end-column="39" />
-          <folding>
-            <element signature="n#style#0;n#button#0;n#!!top" expanded="true" />
-            <element signature="e#11654#11660#0" expanded="true" />
-            <element signature="e#11661#11667#0" expanded="true" />
-            <element signature="e#11668#11674#0" expanded="true" />
-            <element signature="e#11676#11682#0" expanded="true" />
-            <element signature="e#11683#11689#0" expanded="true" />
-            <element signature="e#11690#11696#0" expanded="true" />
-            <element signature="e#11697#11703#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/movie/movie.component.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="99" column="1" lean-forward="true" selection-start-line="99" selection-start-column="1" selection-end-line="99" selection-end-column="1" />
+          <caret line="99" column="1" lean-forward="false" selection-start-line="99" selection-start-column="1" selection-end-line="99" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/movie-viewer/movie-viewer.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/movie-viewer/movie-viewer.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="70" lean-forward="false" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="66" column="65" lean-forward="false" selection-start-line="66" selection-start-column="65" selection-end-line="66" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/movie/movie.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="189" column="122" lean-forward="false" selection-start-line="189" selection-start-column="122" selection-end-line="189" selection-end-column="122" />
+          <folding>
+            <element signature="e#8675#8681#0" expanded="true" />
+            <element signature="e#8681#8687#0" expanded="true" />
+            <element signature="e#8687#8693#0" expanded="true" />
+            <element signature="e#8833#8839#0" expanded="true" />
+            <element signature="e#10914#10920#0" expanded="true" />
+            <element signature="e#10921#10927#0" expanded="true" />
+            <element signature="e#10928#10934#0" expanded="true" />
+            <element signature="e#10936#10942#0" expanded="true" />
+            <element signature="e#10943#10949#0" expanded="true" />
+            <element signature="e#10950#10956#0" expanded="true" />
+            <element signature="e#10957#10963#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/services/movie.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="62" column="56" lean-forward="false" selection-start-line="62" selection-start-column="44" selection-end-line="62" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/movie/movie.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="283" column="29" lean-forward="false" selection-start-line="283" selection-start-column="29" selection-end-line="283" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/navbar/navbar.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="30" column="25" lean-forward="true" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/navbar/navbar.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="28" column="47" lean-forward="false" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="47" />
           <folding />
         </state>
       </provider>

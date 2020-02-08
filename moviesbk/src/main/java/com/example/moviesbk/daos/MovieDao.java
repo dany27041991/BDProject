@@ -37,4 +37,9 @@ public interface MovieDao extends JpaRepository<Movie, Integer>{
 	@Query(value = "SELECT COUNT(*) FROM movie WHERE UPPER(title) LIKE UPPER(?1)", nativeQuery = true)
     int searchMovieByTitle(String title);
 	
+	@Modifying
+    @Transactional
+    @Query(value = "DELETE FROM movie WHERE idmovie = ?1", nativeQuery = true)
+    void deleteMovie(Integer idmovie);
+	
 }

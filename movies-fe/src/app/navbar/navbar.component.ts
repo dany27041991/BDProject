@@ -30,9 +30,13 @@ export class NavbarComponent implements OnInit {
         if (user === null) {
           this.name = '';
           this.isUserLoggedIn = false;
+          this.isSuperUser = false;
         } else {
           this.name = user.name;
           this.isUserLoggedIn = resp;
+          if (user.email === 'superuser@gmail.com') {
+            this.isSuperUser = true;
+          }
         }
       }
     );
@@ -67,6 +71,7 @@ export class NavbarComponent implements OnInit {
       }, 1);
     } else {
       this.isUserLoggedIn = false;
+      this.isSuperUser = false;
     }
   }
 
@@ -92,6 +97,7 @@ export class NavbarComponent implements OnInit {
   logout(e) {
     if (this.auth.logout()) {
       this.isUserLoggedIn = false;
+      this.isSuperUser = false;
       e.preventDefault();
       setTimeout(() => {
         this.router.navigate(['']);

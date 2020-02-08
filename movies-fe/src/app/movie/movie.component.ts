@@ -16,6 +16,7 @@ import {NgForm} from '@angular/forms';
 import {Response} from '../classes/Response';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-movie',
@@ -46,7 +47,9 @@ export class MovieComponent implements OnInit {
   public movieToAdd: Object = null;
   public mexAdded = '';
   public mexWrongAdded = '';
-  constructor(private movieService: MovieService, config: NgbRatingConfig, private modalService: NgbModal, private router: Router) {
+  public confirmFlag = false;
+  constructor(private movieService: MovieService, config: NgbRatingConfig, private modalService: NgbModal, private router: Router,
+              private datePipe: DatePipe) {
     config.max = 5;
     this.movieService.getAllMovies(this.page).subscribe(
       (payload: Response) => {
@@ -140,29 +143,66 @@ export class MovieComponent implements OnInit {
                 if (jsonMovie['Response'] === 'False') {
                   this.mexWrongAdded = 'Sorry, movie not found!';
                 } else {
-                  this.movieToAdd = jsonMovie['Response'];
-                  console.log(jsonMovie['Response']);
+                  this.movieToAdd = {
+                    'title': jsonMovie['Title'],
+                    'year': jsonMovie['Year'],
+                    'released': this.datePipe.transform(jsonMovie['Released'], 'yyyy-MM-dd'),
+                    'runtime': jsonMovie['Runtime'],
+                    'genre': jsonMovie['Genre'],
+                    'director': jsonMovie['Director'],
+                    'writer': jsonMovie['Writer'],
+                    'actors': jsonMovie['Actors'],
+                    'plot': jsonMovie['Plot'],
+                    'language': jsonMovie['Language'],
+                    'country': jsonMovie['Country'],
+                    'adwards': jsonMovie['Awards'],
+                    'poster': jsonMovie['Poster'],
+                    'dvd':  this.datePipe.transform(jsonMovie['DVD'], 'yyyy-MM-dd'),
+                    'production': jsonMovie['Production']
+                  };
                 }
-                console.log(jsonMovie);
               },
-              (httpResp: HttpErrorResponse) => {
-                console.log(httpResp);
+              async (httpResp: HttpErrorResponse) => {
+                this.mexWrongAdded = 'A problem occurred, try later!';
+                await setTimeout(() => {}, 2000);
               });
           } else {
             this.mexWrongAdded = 'Sorry, but this movie already exists!';
             await setTimeout(() => {}, 2000);
           }
         },
-        (httpResp: HttpErrorResponse) => {
-          console.log(httpResp);
+        async (httpResp: HttpErrorResponse) => {
+          this.mexWrongAdded = 'A problem occurred, try later!';
+          await setTimeout(() => {}, 2000);
         });
     }
     this.mexWrongAdded = '';
     this.movieToAdd = null;
   }
 
-  addMovie(form: NgForm) {
+  addMovie() {
+    this.movieService.addMovie(this.movieToAdd).subscribe(
+      async (payload: Response) => {
+        this.mexAdded = 'Added Successfully!';
+        await setTimeout(() => {
+          this.modalService.dismissAll();
+          this.mexAdded = '';
+          this.getNewPageMovies();
+        }, 2000);
+      },
+      async (httpResp: HttpErrorResponse) => {
+        this.mexWrongAdded = 'A problem occurred, try later!';
+        await setTimeout(() => {}, 2000);
+      });
+    this.mexWrongAdded = '';
+    this.mexAdded = '';
+    this.movieToAdd = null;
+  }
 
+  comeBack() {
+    this.movieToAdd = null;
+    this.mexWrongAdded = '';
+    this.mexAdded = '';
   }
 
   addFavourite(movie) {
@@ -213,6 +253,35 @@ export class MovieComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  selectionDeleteMovie() {
+    this.confirmFlag = true;
+
+  }
+
+  notConfirm() {
+    this.confirmFlag = false;
+  }
+
+  confirmedDelete(idmovie: number) {
+    this.movieService.deleteMovie(idmovie).subscribe(
+      async (payload: Response) => {
+        this.mexUpdate = 'Deleted Successfully!';
+        await setTimeout(() => {
+          this.modalService.dismissAll();
+          this.mexUpdate = '';
+          this.getNewPageMovies();
+        }, 2000);
+      },
+      async (httpResp: HttpErrorResponse) => {
+        this.mexWrongUpdate = 'A Problem Occurred. Try Later!';
+        await setTimeout(() => {
+          this.modalService.dismissAll();
+          this.mexWrongUpdate = '';
+        }, 2000);
+      });
+    this.confirmFlag = false;
   }
 
   private getDismissReason(reason: any): string {

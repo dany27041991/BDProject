@@ -54,4 +54,12 @@ export class MovieService {
   searchMovieByTitle(title) {
     return this.http.get('http://www.omdbapi.com/?apikey=660ad911&t=' + title);
   }
+
+  addMovie(movie) {
+    return this.http.post(this.APIAUTHURL + 'add', movie);
+  }
+
+  deleteMovie(idmovie) {
+    return this.http.get(this.APIAUTHURL + 'delete-movie/' + idmovie);
+  }
 }

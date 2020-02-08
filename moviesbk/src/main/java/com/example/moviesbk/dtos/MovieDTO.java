@@ -3,8 +3,10 @@ package com.example.moviesbk.dtos;
 import java.sql.Date;
 import java.util.List;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@NoArgsConstructor
 public class MovieDTO {
 
     @Getter @Setter
@@ -83,5 +85,25 @@ public class MovieDTO {
 		this.production = production;
 		this.addFavouritesObj = addFavourites;
 		this.ratingsObj = ratings;
-  }
+	}
+	
+	public MovieDTO(String title, int year, Date released, String runtime, String genre, 
+			 String director, String writer, String actors, String plot, String language,
+			 String country, String adwards, String poster, Date dvd, String production) {
+		 this.title = title;
+		 this.year = year;
+		 this.released = released;
+		 this.runtime = runtime;
+		 this.genre = genre;
+		 this.director = director;
+		 this.writer = writer;
+		 this.actors = actors;
+		 this.plot = plot;
+		 this.language = language;
+		 this.country = country;
+		 this.adwards = adwards;
+		 this.poster = poster;
+		 this.dvd = dvd;
+		 this.production = production;
+	}
 }

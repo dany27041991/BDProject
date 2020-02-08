@@ -29,6 +29,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RatingModule} from 'ng-starrating';
 import { AddMovieComponent } from './add-movie/add-movie.component';
 import { ErrorComponent } from './error/error.component';
+import { MovieViewerComponent } from './movie-viewer/movie-viewer.component';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { ErrorComponent } from './error/error.component';
     ExampleComponent,
     MovieComponent,
     AddMovieComponent,
-    ErrorComponent
+    ErrorComponent,
+    MovieViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,7 @@ import { ErrorComponent } from './error/error.component';
     RoutingModuleModule,
     RatingModule
   ],
-  providers: [AuthService, ContactService, MovieService],
+  providers: [AuthService, ContactService, MovieService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -43,29 +43,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <div class="row ml-1 mr-1" *ngIf="selectedMovie">
-      <div class="col-6">
-        <div class="row"><p><b>Genre:</b>&nbsp; {{selectedMovie['genre']}}</p></div>
-        <div class="row"><p><b>Year:</b>&nbsp; {{selectedMovie['year']}}&nbsp; <b>Runtime:</b>&nbsp; {{selectedMovie['runtime']}}</p></div>
-        <div class="row"><p><b>Language:</b>&nbsp; {{selectedMovie['language']}}</p></div>
-        <div class="row"><p><b>Country:</b>&nbsp; {{selectedMovie['country']}}</p></div>
-        <div class="row"><p><b>Production:</b>&nbsp; {{selectedMovie['production']}}</p></div>
-        <div class="row"><p><b>Released:</b>&nbsp; {{selectedMovie['released']}}</p></div>
-        <div class="row"><p><b>Dvd:</b>&nbsp; {{selectedMovie['dvd']}}</p></div>
-        <div class="row"><p><b>Director:</b>&nbsp; {{selectedMovie['director']}}</p></div>
-      </div>
-      <div class="col-6">
-        <img class="card-img-top" src="{{selectedMovie['poster']}}" alt="{{selectedMovie['poster']}}" style="width: 210px;">
-      </div>
-    </div>
-    <div class="row ml-1 mr-1" *ngIf="selectedMovie">
-      <div class="col-12">
-        <div class="row"><p><b>Writer:</b>&nbsp; {{selectedMovie['writer']}}</p></div>
-        <div class="row"><p><b>Actors:</b>&nbsp; {{selectedMovie['actors']}}</p></div>
-        <div class="row"><p><b>Plot:</b>&nbsp; {{selectedMovie['plot']}}</p></div>
-        <div class="row"><p><b>Adwards:</b>&nbsp; {{selectedMovie['adwards']}}</p></div>
-      </div>
-    </div>
+    <app-movie-viewer *ngIf="selectedMovie" [selectedMovie]="selectedMovie"></app-movie-viewer>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
@@ -203,15 +181,22 @@
       </div>
     </div>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer" *ngIf="!confirmFlag">
+    <button type="button" class="btn btn-search-movies btn-outline-danger" (click)="selectionDeleteMovie()">Delete Movie</button>
     <button [disabled]="!f.valid" type="button" class="btn btn-outline-dark" (click)="updateMovie(f);">Update</button>
+  </div>
+  <div class="modal-footer" *ngIf="confirmFlag">
+    Are you sure? &nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-search-movies btn-outline-danger" (click)="confirmedDelete(selectedMovie['idmovie'])">Yes</button>&nbsp;
+    <button type="button" class="btn btn-search-movies btn-outline-primary" (click)="notConfirm()">No</button>
   </div>
 </ng-template>
 
 
 <ng-template #contentAddMovie let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-add-movie">Add Movie</h4>
+    <h4 class="modal-title" id="modal-basic-add-movie" *ngIf="!movieToAdd; else addMovieTitleBlock">Add Movie</h4>
+    <ng-template #addMovieTitleBlock><h4>Add {{movieToAdd['title']}}</h4></ng-template>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -225,16 +210,12 @@
       </div>
     </div>
 
-    <div class="row" *ngIf="movieToAdd">
-      <div class="col-12">
-        <form name="addMovieForm" #a="ngForm" (ngSubmit)="addMovie(a)">
-          sdasad
-        </form>
-      </div>
+    <div class="container-fluid" *ngIf="movieToAdd">
+        <app-movie-viewer [selectedMovie]="movieToAdd"></app-movie-viewer>
     </div>
 
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 mt-1 ml-4 mr-5 mb-3">
         <div class="alert-success text-center">
           <b>{{mexAdded}}</b>
         </div>
@@ -252,8 +233,8 @@
   <div class="modal-footer" *ngIf="movieToAdd">
     <div class="row">
       <div class="col-12">
-        <button type="button" class="btn btn-search-movies btn-outline-primary" *ngIf="movieToAdd">Back</button>
-        <button type="button" class="btn btn-outline-danger" *ngIf="movieToAdd">Add</button>
+        <button type="button" class="btn btn-search-movies btn-outline-primary" *ngIf="movieToAdd" (click)="comeBack()">Back</button>
+        <button type="button" class="btn btn-outline-danger" *ngIf="movieToAdd" (click)="addMovie()">Add Movie</button>
       </div>
     </div>
   </div>
