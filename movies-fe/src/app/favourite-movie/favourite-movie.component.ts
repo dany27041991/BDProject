@@ -6,11 +6,24 @@ import {Response} from '../classes/Response';
 import {MoviePageInterface} from '../interfaces/MoviePageInterface';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-favourite-movie',
   templateUrl: './favourite-movie.component.html',
-  styleUrls: ['./favourite-movie.component.css']
+  styleUrls: ['./favourite-movie.component.css'],
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({opacity: 1, transform: 'translateX(0)'})),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-100%)'
+        }),
+        animate('2s ease-in')
+      ]),
+    ])
+  ]
 })
 export class FavouriteMovieComponent implements OnInit {
   private user = new User();

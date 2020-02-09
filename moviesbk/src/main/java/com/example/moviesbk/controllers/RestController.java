@@ -1,16 +1,13 @@
 package com.example.moviesbk.controllers;
 
-import com.example.moviesbk.dtos.ContactFormDTO;
 import com.example.moviesbk.dtos.FavouriteFormDTO;
 import com.example.moviesbk.dtos.LoginFormDTO;
 import com.example.moviesbk.dtos.MovieDTO;
 import com.example.moviesbk.dtos.MovieUpdateFormDTO;
 import com.example.moviesbk.dtos.RatingFormDTO;
 import com.example.moviesbk.dtos.RegistrationFormDTO;
-import com.example.moviesbk.entities.Movie;
 import com.example.moviesbk.entities.User;
 import com.example.moviesbk.exceptions.UserNotExist;
-import com.example.moviesbk.interfaces.ContactService;
 import com.example.moviesbk.interfaces.LoginService;
 import com.example.moviesbk.interfaces.MovieService;
 import com.example.moviesbk.interfaces.RegistrationService;
@@ -23,9 +20,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -36,9 +30,6 @@ public class RestController {
 
     @Autowired
     LoginService loginService;
-
-    @Autowired
-    ContactService contactService;
     
     @Autowired
     MovieService movieService;
@@ -75,45 +66,6 @@ public class RestController {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(new JsonResponseBody(HttpStatus.CONFLICT.value(), "Existing username, register with another one!"));
             }
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
-        }
-    }
-
-    @RequestMapping(value = "/contacts/{id}", method = RequestMethod.GET)
-    public ResponseEntity<JsonResponseBody> getContacts(@PathVariable(name = "id") Integer id) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), contactService.getAllContactsByIdUser(id)));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
-        }
-    }
-
-    @RequestMapping(value = "/contacts/{id}/delete/{idcontact}", method = RequestMethod.GET)
-    public ResponseEntity<JsonResponseBody> deleteContact(@PathVariable(name = "id") Integer id, @PathVariable(name = "idcontact") Integer idcontact) {
-        try {
-            contactService.deleteContactByIdcontact(id, idcontact);
-            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), contactService.getAllContactsByIdUser(id)));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
-        }
-    }
-
-    @RequestMapping(value = "/contacts/addcontact", method = RequestMethod.PUT)
-    public ResponseEntity<JsonResponseBody> addContact(@Valid @RequestBody ContactFormDTO contactFormDTO) {
-        try {
-            contactService.insertContact(contactFormDTO.getName(), contactFormDTO.getSurname(), contactFormDTO.getHousenumber(), contactFormDTO.getCellnumber(), contactFormDTO.getAddress(), contactFormDTO.getDetail(), contactFormDTO.getIduser());
-            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), contactService.getAllContactsByIdUser(contactFormDTO.getIduser())));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
-        }
-    }
-
-    @RequestMapping(value = "/contacts/update", method = RequestMethod.PUT)
-    public ResponseEntity<JsonResponseBody> updateContact(@Valid @RequestBody ContactFormDTO contactFormDTO) {
-        try {
-            contactService.updateContact(contactFormDTO.getIdcontact(), contactFormDTO.getName(), contactFormDTO.getSurname(), contactFormDTO.getHousenumber(), contactFormDTO.getCellnumber(), contactFormDTO.getAddress(), contactFormDTO.getDetail());
-            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), contactService.getAllContactsByIdUser(contactFormDTO.getIduser())));
-        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
         }
     }
@@ -198,6 +150,24 @@ public class RestController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), userService.removeFromFavourite(favouriteFormDTO)));
         }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
+        }
+    }
+   
+    @RequestMapping(value = "/users/all-users", method = RequestMethod.GET)
+    public ResponseEntity<JsonResponseBody> getAllUsers() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), userService.getAllUsers()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
+        }
+    }
+    
+    @RequestMapping(value = "/users/delete-user/{iduser}", method = RequestMethod.GET)
+    public ResponseEntity<JsonResponseBody> deleteUser(@PathVariable(name = "iduser") int iduser) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(new JsonResponseBody(HttpStatus.OK.value(), userService.deleteUser(iduser)));
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonResponseBody(HttpStatus.FORBIDDEN.value(), "Problems connecting to the database, try again later!"));
         }
     }

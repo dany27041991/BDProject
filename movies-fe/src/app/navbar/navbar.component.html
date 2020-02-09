@@ -26,7 +26,8 @@
           Users
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/users">Delete</a>
+          <a class="dropdown-item" (click)="openUsersManagement(userManagement)">Delete</a>
+          <a class="dropdown-item" (click)="openSignUp(contentSignUp)">Insert</a>
         </div>
       </li>
       <li class="nav-item dropdown d-lg-none">
@@ -237,5 +238,17 @@
   </div>
   <div class="modal-footer">
     <button [disabled]="!f.valid" class="btn btn-primary btn-sm" (click)="signUp(f)">Submit</button>
+  </div>
+</ng-template>
+
+<ng-template #userManagement let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Deletion</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-users></app-users>
   </div>
 </ng-template>

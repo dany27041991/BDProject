@@ -56,3 +56,7 @@ label {
     transform: scale(1.1);
   }
 }
+
+.dropdown-item {
+  color: black !important;
+}

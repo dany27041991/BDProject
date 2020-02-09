@@ -12,11 +12,7 @@ import {FormsModule} from '@angular/forms';
 import {RoutingModuleModule} from './routing-module.module';
 import {AuthService} from './services/auth.service';
 import { CompareValidatorDirective } from './shared/compare-validator.directive';
-import { ContactsComponent } from './contacts/contacts.component';
-import {ContactService} from './services/contact.service';
 import { HomeComponent } from './home/home.component';
-import { ModalBasicComponent } from './modal-basic/modal-basic.component';
-import { ModalBasicUpdateComponent } from './modal-basic-update/modal-basic-update.component';
 import { MyselfComponent } from './myself/myself.component';
 import { ExamComponent } from './exam/exam.component';
 import { UsersComponent } from './users/users.component';
@@ -40,10 +36,7 @@ import { FavouriteMovieComponent } from './favourite-movie/favourite-movie.compo
     FooterComponent,
     NavbarComponent,
     CompareValidatorDirective,
-    ContactsComponent,
     HomeComponent,
-    ModalBasicComponent,
-    ModalBasicUpdateComponent,
     MyselfComponent,
     ExamComponent,
     UsersComponent,
@@ -66,7 +59,7 @@ import { FavouriteMovieComponent } from './favourite-movie/favourite-movie.compo
     RoutingModuleModule,
     RatingModule
   ],
-  providers: [AuthService, ContactService, MovieService, DatePipe],
+  providers: [AuthService, MovieService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

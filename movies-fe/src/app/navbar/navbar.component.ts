@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {User} from '../classes/User';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalConfig, NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NgForm} from '@angular/forms';
 import {Response} from '../classes/Response';
 
@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
   public isUserLoggedIn = false;
   public isSuperUser = false;
   public name: string;
+  public closeResult: string;
   constructor(private auth: AuthService, private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -143,5 +144,23 @@ export class NavbarComponent implements OnInit {
     setTimeout(() => {
       this.modalService.dismissAll();
     }, time);
+  }
+
+  openUsersManagement(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 }

@@ -63,4 +63,10 @@ export class AuthService {
     this.isUserLogged = false;
     return true;
   }
+  getAllContacts() {
+    return this.http.get(this.APIAUTHURL + 'users/all-users');
+  }
+  deleteUser(iduser: number) {
+    return this.http.get(this.APIAUTHURL + 'users/delete-user/' + iduser);
+  }
 }
