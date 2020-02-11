@@ -28,7 +28,7 @@ import {DatePipe} from '@angular/common';
       transition('void => *', [
         style({
           opacity: 0,
-          transform: 'translateX(-100%)'
+          transform: 'translateX(0%)'
         }),
         animate('2s ease-in')
       ]),

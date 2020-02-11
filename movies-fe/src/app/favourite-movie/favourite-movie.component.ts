@@ -18,7 +18,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       transition('void => *', [
         style({
           opacity: 0,
-          transform: 'translateX(-100%)'
+          transform: 'translateX(0%)'
         }),
         animate('2s ease-in')
       ]),
