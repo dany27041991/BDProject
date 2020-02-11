@@ -17,7 +17,7 @@ public class AddFavourite {
 	@Getter @Setter
 	AddFavouriteKey id;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @MapsId("iduser")
     @JoinColumn(name = "iduser_fk")
 	@Getter @Setter

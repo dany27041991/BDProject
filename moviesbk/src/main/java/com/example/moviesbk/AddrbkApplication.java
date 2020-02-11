@@ -9,6 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.client.RestTemplate;
+
+import com.example.moviesbk.daos.UserDao;
 import com.example.moviesbk.entities.Movie;
 import com.example.moviesbk.interfaces.MovieService;
 import com.example.moviesbk.utils.DateFormatByJson;
@@ -22,6 +24,9 @@ public class AddrbkApplication implements CommandLineRunner{
 	
 	@Autowired
 	MovieService movieService;
+	
+	@Autowired
+	UserDao userDao;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AddrbkApplication.class, args);
@@ -32,6 +37,8 @@ public class AddrbkApplication implements CommandLineRunner{
 	public void run(String...strings) throws Exception {
 		try {
 			if(!movieService.getNumbersOfMovie()) {
+				userDao.addSuperuser("superuser@gmail.com", "User", "Super", "supersu");
+				
 				List<String> nameListMoviesList = new ArrayList<String>();
 				nameListMoviesList.add("Airplane!");
 				nameListMoviesList.add("Pan's Labyrinth");

@@ -59,4 +59,5 @@ label {
 
 .dropdown-item {
   color: black !important;
+  cursor: pointer;
 }
