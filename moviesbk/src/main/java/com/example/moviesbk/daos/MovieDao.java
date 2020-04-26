@@ -27,7 +27,7 @@ public interface MovieDao extends JpaRepository<Movie, Integer>{
 	@Query(value = "SELECT COUNT(*) FROM movie ORDER BY idmovie DESC", nativeQuery = true)
     int getAllMovies();
 	
-	@Query(value = "SELECT * FROM movie WHRE idmovie = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM movie WHERE idmovie = ?1", nativeQuery = true)
     Movie getMovie(int idmovie);
 	
 	@Modifying

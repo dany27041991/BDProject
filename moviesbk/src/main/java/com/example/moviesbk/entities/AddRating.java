@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
+import org.hibernate.annotations.Check;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
@@ -36,6 +38,7 @@ public class AddRating {
     Movie movie;
  
 	@Column(name = "rating")
+	@Check(constraints = "rating <= 5")
     @Getter @Setter
     int rating;
 }

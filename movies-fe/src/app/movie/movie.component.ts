@@ -108,7 +108,10 @@ export class MovieComponent implements OnInit {
           count++;
         }
       });
-      return total / count;
+      if (Number.isInteger(total / count)) {
+        return (total / count);
+      }
+      return (total / count).toFixed(2);
     } else {
       return 0;
     }
